@@ -22,15 +22,3 @@
 | Industrial Communication Toolbox | Later requirement | Modbus TCP read/write between Simulink/MATLAB and OpenPLC |
 
 MathWorks documents the Simulink Modbus Client blocks as available beginning in R2024b, so R2024b or newer is recommended.
-
-## Not required
-
-- Simscape
-- Simscape Fluids
-- Stateflow
-- PLC Coder
-- Simulink Coder
-- Optimization Toolbox
-- System Identification Toolbox
-- Robust Control Toolbox
-- Fixed-Point Designer
