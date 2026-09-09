@@ -1,8 +1,5 @@
 function modelFile = build_water_treatment_plant(forceRebuild)
-%BUILD_WATER_TREATMENT_PLANT Generate the standalone open-loop Simulink plant model (revision 0.2).
-%
-% build_water_treatment_plant(true)  overwrites the generated model.
-% build_water_treatment_plant(false) opens the existing model when present.
+% generate the standalone open-loop simulink plant model
 
 if nargin < 1
     forceRebuild = false;
@@ -42,13 +39,11 @@ set_param(modelName, ...
     'TimeSaveName', 'tout', ...
     'SignalLogging', 'off');
 
-% Ensure the source-of-truth parameter structure exists for immediate use.
 if evalin('base', 'exist(''P'', ''var'')') == 0
     assignin('base', 'P', initialize_water_plant(false));
 end
 create_default_inputs(120, true);
 
-% Input profiles
 sourceNames = { ...
     'raw_inflow', 'demand_flow', 'cmd_P101A', 'cmd_P101B', 'cmd_P201', ...
     'cmd_P301A', 'cmd_P301B', 'cmd_DP201', 'cmd_M201', 'cmd_XV201', ...
@@ -59,7 +54,6 @@ for k = 1:numel(sourceNames)
     addFromWorkspace(modelName, sourceNames{k}, sourceNames{k}, [25 y 150 y+25]);
 end
 
-% Main dynamic subsystems
 addTankSubsystem([modelName '/Tank_T101'], ...
     'P.T101.initialVolume_m3', 'P.T101.maxVolume_m3', [360 70 575 210]);
 addTankSubsystem([modelName '/Tank_T201'], ...
@@ -82,7 +76,6 @@ addValveSubsystem([modelName '/XV201_Valve'], [760 650 975 760]);
 addConcentrationSubsystem([modelName '/Treatment_Concentration'], [1015 250 1245 395]);
 addPressureSubsystem([modelName '/Distribution_Pressure'], [1445 120 1695 300]);
 
-% Top-level arithmetic and permissive logic
 add_block('simulink/Math Operations/Sum', [modelName '/P101_TotalFlow'], ...
     'Inputs', '++', 'Position', [640 330 670 380]);
 add_block('simulink/Math Operations/Product', [modelName '/P201_ValveFlow'], ...
@@ -104,7 +97,6 @@ add_block('simulink/Math Operations/Product', [modelName '/P301B_Enabled'], ...
 add_block('simulink/Math Operations/Product', [modelName '/DeliveredDemand'], ...
     'Inputs', '**', 'Position', [1550 475 1585 515]);
 
-% Tank T-101 and P-101 pumps
 add_line(modelName, 'raw_inflow/1', 'Tank_T101/1', 'autorouting', 'on');
 add_line(modelName, 'Tank_T101/2', 'T101_SourceAvailable/1', 'autorouting', 'on');
 add_line(modelName, 'avail_P101A/1', 'P101A_Enabled/1', 'autorouting', 'on');
@@ -120,7 +112,6 @@ add_line(modelName, 'P101B_Actuator/2', 'P101_TotalFlow/2', 'autorouting', 'on')
 add_line(modelName, 'P101_TotalFlow/1', 'Tank_T101/2', 'autorouting', 'on');
 add_line(modelName, 'P101_TotalFlow/1', 'Tank_T201/1', 'autorouting', 'on');
 
-% T-201 transfer and valve
 add_line(modelName, 'Tank_T201/2', 'T201_SourceAvailable/1', 'autorouting', 'on');
 add_line(modelName, 'avail_P201/1', 'P201_Enabled/1', 'autorouting', 'on');
 add_line(modelName, 'T201_SourceAvailable/1', 'P201_Enabled/2', 'autorouting', 'on');
@@ -132,13 +123,11 @@ add_line(modelName, 'XV201_Valve/1', 'P201_ValveFlow/2', 'autorouting', 'on');
 add_line(modelName, 'P201_ValveFlow/1', 'Tank_T201/2', 'autorouting', 'on');
 add_line(modelName, 'P201_ValveFlow/1', 'Tank_T301/1', 'autorouting', 'on');
 
-% Treatment concentration
 add_line(modelName, 'cmd_DP201/1', 'Treatment_Concentration/1', 'autorouting', 'on');
 add_line(modelName, 'cmd_M201/1', 'Treatment_Concentration/2', 'autorouting', 'on');
 add_line(modelName, 'Tank_T201/1', 'Treatment_Concentration/3', 'autorouting', 'on');
 add_line(modelName, 'P201_ValveFlow/1', 'Treatment_Concentration/4', 'autorouting', 'on');
 
-% T-301 and booster pumps
 add_line(modelName, 'Tank_T301/2', 'T301_SourceAvailable/1', 'autorouting', 'on');
 add_line(modelName, 'demand_flow/1', 'DeliveredDemand/1', 'autorouting', 'on');
 add_line(modelName, 'T301_SourceAvailable/1', 'DeliveredDemand/2', 'autorouting', 'on');
@@ -157,7 +146,6 @@ add_line(modelName, 'P301B_Actuator/1', 'Distribution_Pressure/2', 'autorouting'
 add_line(modelName, 'demand_flow/1', 'Distribution_Pressure/3', 'autorouting', 'on');
 
 
-% Terminate feedback signals retained for later PLC integration but not yet used.
 addTerminator(modelName, 'Term_P101A_RunFb', [620 390 640 410]);
 addTerminator(modelName, 'Term_P101B_Speed', [620 435 640 455]);
 addTerminator(modelName, 'Term_P101B_RunFb', [620 480 640 500]);
@@ -182,7 +170,6 @@ add_line(modelName, 'P301B_Actuator/3', 'Term_P301B_RunFb/1', 'autorouting', 'on
 add_line(modelName, 'XV201_Valve/2', 'Term_XV201_OpenFb/1', 'autorouting', 'on');
 add_line(modelName, 'XV201_Valve/3', 'Term_XV201_ClosedFb/1', 'autorouting', 'on');
 
-% Logged outputs
 addToWorkspace(modelName, 'Log_T101_Volume', 'sim_T101_Volume_m3', [1790 340 1945 365]);
 addToWorkspace(modelName, 'Log_T101_Level', 'sim_T101_Level_pct', [1790 375 1945 400]);
 addToWorkspace(modelName, 'Log_T201_Volume', 'sim_T201_Volume_m3', [1790 410 1945 435]);
@@ -221,7 +208,6 @@ add_line(modelName, 'DeliveredDemand/1', 'Log_DeliveredDemand/1', 'autorouting',
 add_line(modelName, 'P301A_Actuator/1', 'Log_P301A_Speed/1', 'autorouting', 'on');
 add_line(modelName, 'P301B_Actuator/1', 'Log_P301B_Speed/1', 'autorouting', 'on');
 
-% Add descriptive annotations.
 Simulink.Annotation(modelName, ...
     'Standalone physical plant. Final sequencing and PI execution belong in OpenPLC.');
 

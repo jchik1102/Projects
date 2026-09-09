@@ -1,5 +1,5 @@
 function state = startup_project()
-%STARTUP_PROJECT Configure paths, validate products, and load design data.
+% configure paths, validate products, and load design data
 
 thisFile = mfilename('fullpath');
 projectRoot = fileparts(fileparts(fileparts(thisFile)));

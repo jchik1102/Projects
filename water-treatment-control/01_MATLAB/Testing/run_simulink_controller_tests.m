@@ -1,5 +1,5 @@
 function results = run_simulink_controller_tests()
-%RUN_SIMULINK_CONTROLLER_TESTS Verify generated PI controller test models.
+% verify generated pi controller test models
 
 fprintf('\n============================================================\n');
 fprintf(' STAGE 4 SIMULINK CLOSED-LOOP CONTROLLER TESTS\n');

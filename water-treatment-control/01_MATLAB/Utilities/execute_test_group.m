@@ -1,5 +1,5 @@
 function results = execute_test_group(names, funcs, outputFile)
-%EXECUTE_TEST_GROUP Run test functions and save a standardized result table.
+% run test functions and save a result table
 
 N=numel(names); Pass=false(N,1); Details=cell(N,1);
 for k=1:N

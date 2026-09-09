@@ -1,17 +1,6 @@
 function results = run_stage5_full_control_integration()
-%RUN_STAGE5_FULL_CONTROL_INTEGRATION Validate Stage 5 with the live plant.
-%
-% This approximately 260-second, wall-clock-paced commissioning test proves:
-%   1. one complete automatic treatment batch;
-%   2. pressure PI execution through OpenPLC;
-%   3. concentration PI execution through OpenPLC;
-%   4. booster staging and lead alternation; and
-%   5. physical standby takeover after a P-301A trip.
-%
-% The commissioning profile uses the same plant equations and controller
-% constants as the nominal design. T-201 volume and DP-201 capacity are both
-% scaled by 0.10 so their process gain is preserved while the live test is
-% shortened from roughly 40 minutes to about 4.5 minutes.
+% run the 260 s commissioning profile
+% tank volume and dose capacity are both scaled to 10% to shorten the run
 
 check_openplc_requirements();
 
@@ -72,7 +61,6 @@ catch ME
     rethrow(ME);
 end
 
-% The MATLAB System block has released its Modbus connection.
 localDisableTestSequences();
 localPostTestSafeState();
 
@@ -91,8 +79,7 @@ localPostTestSafeState();
 [tDiagnostics, diagnostics] = localSeries( ...
     simOut, 'sim_OpenPLC_Diagnostics', 48);
 
-% Diagnostic vector mapping: HR301:HR317 are columns 1:17 and
-% C151:C181 are columns 18:48. See Stage5_Diagnostic_Map.csv.
+% HR301:HR317 use columns 1:17; C151:C181 use 18:48 (see Stage5_Diagnostic_Map.csv)
 batchState = round(diagnostics(:, 1));
 batchCount = round(diagnostics(:, 2));
 rejectedBatchCount = round(diagnostics(:, 3));
@@ -334,7 +321,6 @@ samples = squeeze(double(ts.Data));
 if width == 1
     samples = samples(:);
 elseif size(samples, 2) == width
-    % Already one row per time sample.
 elseif size(samples, 1) == width
     samples = samples.';
 elseif mod(numel(samples), width) == 0
@@ -513,7 +499,7 @@ end
 
 
 function localReleaseClient(~)
-% MODBUS objects release their socket when the local variable is cleared.
+% clearing the local client releases the socket
 end
 
 

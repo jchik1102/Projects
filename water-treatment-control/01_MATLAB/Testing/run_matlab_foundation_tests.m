@@ -1,5 +1,5 @@
 function results = run_matlab_foundation_tests()
-%RUN_MATLAB_FOUNDATION_TESTS Validate parameters, calculations, and maps.
+% validate parameters, calculations, and maps
 
 fprintf('\n============================================================\n');
 fprintf(' STAGE 1 MATLAB FOUNDATION TESTS\n');

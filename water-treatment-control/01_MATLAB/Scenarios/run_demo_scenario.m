@@ -1,5 +1,5 @@
 function outputs = run_demo_scenario()
-%RUN_DEMO_SCENARIO Run both closed-loop controller demonstrations and plot.
+% run both closed-loop controller demonstrations and plot
 
 startup_project(); build_controller_test_models(false);
 P=evalin('base','P'); M=evalin('base','MODELS'); CTRL=evalin('base','CTRL');

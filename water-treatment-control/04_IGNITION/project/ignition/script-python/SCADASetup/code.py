@@ -1,10 +1,4 @@
-"""Water-treatment SCADA safety helpers and one-time tag setup.
-
-Run from the Designer Script Console after creating a Core Historian named
-WaterTreatmentHistory and an Internal Alarm Journal named WaterTreatmentJournal:
-
-    SCADASetup.run("WaterTreatmentHistory")
-"""
+"""tag setup and hmi helpers; run SCADASetup.run("WaterTreatmentHistory") once after import"""
 
 from java.lang import Thread
 
@@ -44,7 +38,7 @@ def _require_good(quality_code, action):
 
 
 def pulse(relative_path, hold_ms=300):
-    """Pulse a PLC edge-detected operator request and always restore False."""
+    """pulse a plc edge-detected operator request and always restore false"""
     full_path = _require(relative_path, PULSE_REQUESTS, "Pulse")
     first = system.tag.writeBlocking([full_path], [True])[0]
     _require_good(first, "Writing True to " + full_path)
@@ -57,7 +51,7 @@ def pulse(relative_path, hold_ms=300):
 
 
 def toggle_request(relative_path):
-    """Toggle a sustained manual request; PLC interlocks remain authoritative."""
+    """toggle a sustained manual request; plc interlocks remain authoritative"""
     full_path = _require(relative_path, SUSTAINED_REQUESTS, "Manual request")
     current = system.tag.readBlocking([full_path])[0]
     _require_good(current.quality, "Reading " + full_path)
@@ -67,7 +61,7 @@ def toggle_request(relative_path):
 
 
 def toggle_fault(relative_path):
-    """Toggle only one of the four documented simulation fault requests."""
+    """toggle only one of the four documented simulation fault requests"""
     full_path = _require(relative_path, FAULT_REQUESTS, "Fault injection")
     current = system.tag.readBlocking([full_path])[0]
     _require_good(current.quality, "Reading " + full_path)
@@ -85,7 +79,7 @@ def reset_faults():
 
 
 def clear_requests():
-    """Clear all HMI request bits without writing any PLC-owned actuator output."""
+    """clear all hmi request bits without writing any plc-owned actuator output"""
     relatives = sorted(PULSE_REQUESTS | SUSTAINED_REQUESTS)
     paths = [_path(item) for item in relatives]
     results = system.tag.writeBlocking(paths, [False] * len(paths))
@@ -95,7 +89,7 @@ def clear_requests():
 
 
 def adjust_setpoint(relative_path, direction):
-    """Move a writable setpoint by one documented step and clamp to PLC limits."""
+    """move a writable setpoint by one documented step and clamp to plc limits"""
     if relative_path not in SETPOINTS:
         raise ValueError("Setpoint write is not permitted for " + str(relative_path))
     full_path = _path(relative_path)
@@ -119,7 +113,7 @@ def _merge_tag(relative_path, properties):
 
 
 def configure_alarms():
-    """Apply 18 PLC-derived Boolean alarms with operator-facing messages."""
+    """apply 18 plc-derived boolean alarms with operator-facing messages"""
     for relative_path, name, priority, display_path, message in ALARMS:
         alarm = {
             "name": name,
@@ -138,7 +132,7 @@ def configure_alarms():
 
 
 def configure_history(history_provider="WaterTreatmentHistory"):
-    """Enable bounded on-change history for required analog and discrete tags."""
+    """enable bounded on-change history for required analog and discrete tags"""
     if not history_provider:
         raise ValueError("A historian provider name is required")
     common = {
@@ -171,7 +165,7 @@ def configure_history(history_provider="WaterTreatmentHistory"):
 
 
 def validate():
-    """Read every imported v0.5.2 OPC tag and report existence/quality."""
+    """read every imported v0.5.2 opc tag and report existence/quality"""
     missing = [path for path in ALL_TAGS if not system.tag.exists(path)]
     existing = [path for path in ALL_TAGS if path not in missing]
     values = system.tag.readBlocking(existing) if existing else []
@@ -193,7 +187,7 @@ def validate():
 
 
 def run(history_provider="WaterTreatmentHistory"):
-    """Run once after project import and Gateway historian/journal creation."""
+    """run once after project import and gateway historian/journal creation"""
     preflight = validate()
     if preflight["missing"]:
         raise ValueError("Tag setup stopped because required tags are missing")

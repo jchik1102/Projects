@@ -1,5 +1,4 @@
-% BUILD_OPENPLC_INTEGRATION
-% Build and open the generated Simulink/OpenPLC closed-loop model.
+% build and open the generated simulink/openplc closed-loop model
 
 START_HERE
 build_openplc_integrated_model(true)

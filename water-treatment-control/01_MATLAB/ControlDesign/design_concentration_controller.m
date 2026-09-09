@@ -1,5 +1,5 @@
 function D = design_concentration_controller(P, M, makePlots)
-%DESIGN_CONCENTRATION_CONTROLLER Tune and validate the dosing PI controller.
+% tune and validate the dosing pi controller
 
 if nargin < 1 || isempty(P), P = initialize_water_plant(false); end
 if nargin < 2 || isempty(M), M = derive_plant_models(P, false); end

@@ -1,10 +1,5 @@
 function results = run_openplc_simulink_demo()
-%RUN_OPENPLC_SIMULINK_DEMO Prove the first real Simulink/OpenPLC loop.
-%
-% The demo uses one live Modbus client at a time. The bridge performs the
-% reset/automatic/start request sequence through its own connection while
-% the paced simulation runs. After Simulink releases that connection, this
-% function reads PLC status and evaluates the captured physical signals.
+% prove the first real simulink/openplc loop
 
 check_openplc_requirements();
 
@@ -12,8 +7,6 @@ modelName = 'Water_Treatment_Plant_OpenPLC_v0_4';
 modelFile = build_openplc_integrated_model(false);
 load_system(modelFile);
 
-% Use a short integration-test operating point. These values affect only
-% this simulation and do not change initialize_water_plant.m.
 P = initialize_water_plant(false);
 P.T101.initialLevel_pct = 80;
 P.T101.initialVolume_m3 = P.T101.maxVolume_m3 * 0.80;
@@ -24,8 +17,6 @@ P.T301.initialVolume_m3 = P.T301.maxVolume_m3 * 0.70;
 P.sim.defaultStopTime_s = 30;
 U = create_default_inputs(30, false);
 
-% Clear stale requests/faults and set the test operating values before the
-% Simulink bridge takes exclusive ownership of the MATLAB Modbus session.
 localDisableDemoSequence();
 localClearDiagnosticState();
 localPrepareOpenPLC();
@@ -70,8 +61,6 @@ catch ME
     rethrow(ME);
 end
 
-% The simulation has ended and releaseImpl has closed the bridge client.
-% Disable the private demo request generator before opening a status client.
 localDisableDemoSequence();
 
 [~, commExchange] = localSeries(simOut, ...
@@ -89,7 +78,6 @@ initialLevel_pct = t201Level(1, 1);
 finalLevel_pct = t201Level(end, 1);
 levelIncreased = finalLevel_pct >= initialLevel_pct + 0.20;
 
-% Read PLC-owned status only after Simulink has released its client.
 m = modbus('tcpip', '127.0.0.1', 5020, 'Timeout', 3);
 plcCleanup = onCleanup(@() localSafeStop(m)); %#ok<NASGU>
 watchdogHealthy = read(m, 'coils', 151, 1) == 1;
@@ -140,14 +128,12 @@ end
 function localPrepareOpenPLC()
 m = modbus('tcpip', '127.0.0.1', 5020, 'Timeout', 3);
 
-% Stop any previous run, then clear only mapped request and fault ranges.
 localPulse(m, 102);
 write(m, 'coils', 101, zeros(1, 6));
 write(m, 'coils', 110, zeros(1, 9));
 write(m, 'coils', 251, zeros(1, 4));
 write(m, 'holdingregs', 201, [4000 120 800 2 500]);
 
-% Seed plausible plant values. The bridge overwrites them from Simulink.
 write(m, 'holdingregs', 1, [800 750 700 0 0 300 0 4000 0]);
 pause(0.25);
 clear m
@@ -192,7 +178,6 @@ samples = squeeze(double(ts.Data));
 if width == 1
     samples = samples(:);
 elseif size(samples, 2) == width
-    % Already one row per time sample.
 elseif size(samples, 1) == width
     samples = samples.';
 elseif mod(numel(samples), width) == 0

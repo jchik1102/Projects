@@ -1,5 +1,5 @@
 function generate_control_design_plots()
-%GENERATE_CONTROL_DESIGN_PLOTS Save controller response and margin plots.
+% save controller response and margin plots
 
 P = initialize_water_plant(false);
 M = derive_plant_models(P, false);

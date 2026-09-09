@@ -1,5 +1,5 @@
 function results = run_simulink_plant_tests()
-%RUN_SIMULINK_PLANT_TESTS Build, simulate, and verify the standalone Simulink plant.
+% build, simulate, and verify the standalone simulink plant
 
 fprintf('\n============================================================\n');
 fprintf(' STAGE 3 STANDALONE SIMULINK PLANT TESTS\n');

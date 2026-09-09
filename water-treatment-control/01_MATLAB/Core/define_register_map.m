@@ -1,5 +1,5 @@
 function registerMap = define_register_map(exportFile, printSummary)
-%DEFINE_REGISTER_MAP Create the initial source-of-truth register map.
+% create the initial register map
 
 if nargin < 1 || isempty(exportFile)
     matlabDir = fileparts(mfilename('fullpath'));

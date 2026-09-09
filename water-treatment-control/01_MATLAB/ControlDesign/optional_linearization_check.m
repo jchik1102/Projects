@@ -1,10 +1,5 @@
 function result = optional_linearization_check()
-%OPTIONAL_LINEARIZATION_CHECK Demonstrate Simulink Control Design availability.
-%
-% The core project does not require this product. When installed, this
-% function verifies that command-line linearization tools are available and
-% records that the generated controller test models are candidates for exact
-% model linearization in the next revision.
+% demonstrate simulink control design availability
 
 s=check_toolboxes(false);
 if ~s.SimulinkControlDesign

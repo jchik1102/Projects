@@ -1,5 +1,5 @@
 function CTRL = design_all_controllers(P, M, printSummary)
-%DESIGN_ALL_CONTROLLERS Design both toolbox-based PI controllers.
+% design both toolbox-based pi controllers
 
 if nargin < 1 || isempty(P), P = initialize_water_plant(false); end
 if nargin < 2 || isempty(M), M = derive_plant_models(P, false); end

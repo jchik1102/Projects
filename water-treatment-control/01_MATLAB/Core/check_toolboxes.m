@@ -1,5 +1,5 @@
 function status = check_toolboxes(printSummary)
-%CHECK_TOOLBOXES Verify required, optional, and future MathWorks products.
+% verify required, optional, and future mathworks products
 
 if nargin < 1
     printSummary = true;

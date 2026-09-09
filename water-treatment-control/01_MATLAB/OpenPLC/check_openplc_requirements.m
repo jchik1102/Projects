@@ -1,5 +1,5 @@
 function report = check_openplc_requirements()
-%CHECK_OPENPLC_REQUIREMENTS Verify software needed for OpenPLC integration.
+% verify software needed for openplc integration
 products = ver;
 names = string({products.Name});
 report = table(["MATLAB";"Simulink";"Control System Toolbox";"Industrial Communication Toolbox"], ...

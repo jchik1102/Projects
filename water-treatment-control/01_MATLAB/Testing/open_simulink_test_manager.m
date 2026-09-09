@@ -1,5 +1,5 @@
 function open_simulink_test_manager()
-%OPEN_SIMULINK_TEST_MANAGER Open Test Manager when Simulink Test is installed.
+% open test manager when simulink test is installed
 s=check_toolboxes(false);
 if ~s.SimulinkTest
     error('WaterProject:MissingSimulinkTest', ...

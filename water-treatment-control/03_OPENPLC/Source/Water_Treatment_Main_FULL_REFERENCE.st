@@ -228,14 +228,9 @@ VAR
     AlarmWord2Internal : UINT := 0;
 END_VAR
 
-(* ============================================================
-   AUTOMATED WATER TREATMENT STATION - OPENPLC MAIN PROGRAM
-   Scan period required: 100 ms
-   External analog values are scaled UINT16 values over Modbus TCP.
-   Simulink owns the physical plant. OpenPLC owns operational control.
-   ============================================================ *)
 
-(* Scale external values into engineering units. *)
+
+
 LIT101_pct := UINT_TO_REAL(LIT101_PV) / 10.0;
 LIT201_pct := UINT_TO_REAL(LIT201_PV) / 10.0;
 LIT301_pct := UINT_TO_REAL(LIT301_PV) / 10.0;
@@ -271,7 +266,7 @@ ELSE
     ManualDose_pct := 100.0;
 END_IF;
 
-(* Rising-edge detection for operator requests. *)
+
 StartEdge := System_StartReq AND NOT Last_StartReq;
 StopEdge := System_StopReq AND NOT Last_StopReq;
 ResetEdge := System_ResetReq AND NOT Last_ResetReq;
@@ -285,7 +280,7 @@ Last_AutoModeReq := Auto_ModeReq;
 Last_ManualModeReq := Manual_ModeReq;
 Last_MaintenanceModeReq := Maintenance_ModeReq;
 
-(* Simulink heartbeat watchdog: 20 scans = 2.0 seconds. *)
+(* 20 scans without a heartbeat change = 2 s timeout *)
 IF Plant_Heartbeat <> LastHeartbeat THEN
     LastHeartbeat := Plant_Heartbeat;
     WatchdogScans := 0;
@@ -296,7 +291,7 @@ END_IF;
 Comm_Healthy := HeartbeatSeen AND (WatchdogScans < 20) AND NOT Fault_CommsLoss;
 Communication_Fault := NOT Comm_Healthy;
 
-(* Alarm conditions and basic availability. *)
+
 T101_LowLow := LIT101_pct <= 5.0;
 T201_HighHigh := LIT201_pct >= 95.0;
 T301_LowLow := LIT301_pct <= 5.0;
@@ -311,7 +306,7 @@ P301A_Available := NOT Fault_P301A_Trip AND NOT P301A_FailedStart;
 P301B_Available := NOT P301B_FailedStart;
 Both_Boosters_Unavailable := NOT P301A_Available AND NOT P301B_Available;
 
-(* Detect a frozen concentration signal during active dosing. *)
+(* check for a stuck sensor while dosing *)
 IF Concentration_PI_Enabled AND (DoseOutput_pct > 20.0) AND
    (((ConcentrationSP_mgL - AIT201_mgL) > 0.15) OR ((ConcentrationSP_mgL - AIT201_mgL) < -0.15)) THEN
     IF AIT201_PV = AIT_LastRaw THEN
@@ -325,7 +320,7 @@ END_IF;
 AIT_LastRaw := AIT201_PV;
 AIT201_Invalid := (AIT_FrozenCounter >= 150);
 
-(* Mode handling. Critical faults always force a safe stopped mode. *)
+(* critical faults force stopped mode *)
 IF AutoModeEdge THEN Requested_Mode := MODE_AUTO; END_IF;
 IF ManualModeEdge THEN Requested_Mode := MODE_MANUAL; END_IF;
 IF MaintenanceModeEdge THEN Requested_Mode := MODE_MAINTENANCE; END_IF;
@@ -347,7 +342,7 @@ IF StartEdge AND (Active_Mode = MODE_AUTO) AND Comm_Healthy AND NOT Emergency_St
     IF P301A_RuntimeInternal_s <= P301B_RuntimeInternal_s THEN LeadBoosterInternal := 1; ELSE LeadBoosterInternal := 2; END_IF;
 END_IF;
 
-(* Reset only when initiating critical conditions are clear. *)
+(* only reset after the critical fault clears *)
 IF ResetEdge AND Comm_Healthy AND NOT Emergency_Stop AND NOT Concentration_HighHigh THEN
     FirstOut_Code := 0;
     P101A_FailedStart := FALSE;
@@ -366,7 +361,7 @@ IF ResetEdge AND Comm_Healthy AND NOT Emergency_Stop AND NOT Concentration_HighH
     IF Batch_State = STATE_FAULTED THEN Batch_State := STATE_STOPPED; END_IF;
 END_IF;
 
-(* Default commands are safe each scan; logic below must explicitly enable them. *)
+(* start each scan with outputs off; enable them below if allowed *)
 Cmd_P101A := FALSE; Cmd_P101B := FALSE; Cmd_P201 := FALSE;
 Cmd_P301A := FALSE; Cmd_P301B := FALSE; Cmd_M201 := FALSE; Cmd_XV201 := FALSE;
 P101A_Speed_pct := 0.0; P101B_Speed_pct := 0.0; P201_Speed_pct := 0.0;
@@ -374,14 +369,14 @@ P301A_Speed_pct := 0.0; P301B_Speed_pct := 0.0; DoseOutput_pct := 0.0;
 Concentration_PI_Enabled := FALSE;
 Pressure_PI_Enabled := FALSE;
 
-(* Automatic treatment batch state machine. *)
+(* batch sequence *)
 IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergency_Stop THEN
     BatchDurationScans := BatchDurationScans + 1;
     CASE Batch_State OF
-        0: (* STATE_STOPPED; literal required by OpenPLC Runtime v4 C++ code generation *)
+        0: 
             Batch_State := STATE_READY;
 
-        10: (* STATE_READY *)
+        10: 
             FillCounter := 0; DoseCounter := 0; MixCounter := 0; TransferCounter := 0;
             StableCounter := 0; Batch_Accepted := FALSE; Batch_Retry_Count := 0;
             IF NOT T101_LowLow AND NOT T201_HighHigh AND NOT T301_HighHigh AND (P101A_Available OR P101B_Available) THEN
@@ -389,7 +384,7 @@ IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergen
                 Batch_State := STATE_FILL;
             END_IF;
 
-        20: (* STATE_FILL *)
+        20: 
             FillCounter := FillCounter + 1;
             IF P101Duty = 0 THEN
                 IF P101A_Available AND ((P101A_RuntimeInternal_s <= P101B_RuntimeInternal_s) OR NOT P101B_Available) THEN
@@ -410,7 +405,7 @@ IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergen
                 Fill_Timeout := TRUE; Batch_State := STATE_FAULTED;
             END_IF;
 
-        30: (* STATE_DOSE *)
+        30: 
             DoseCounter := DoseCounter + 1;
             Cmd_M201 := TRUE;
             Concentration_PI_Enabled := (LIT201_pct >= 20.0) AND M201_RunFb AND NOT Concentration_HighHigh AND NOT AIT201_Invalid;
@@ -446,14 +441,14 @@ IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergen
                 Batch_State := STATE_FAULTED;
             END_IF;
 
-        40: (* STATE_MIX *)
+        40: 
             Cmd_M201 := TRUE;
             MixCounter := MixCounter + 1;
             IF MixCounter >= UINT_TO_UDINT(MixTime_s) * 10 THEN
                 Batch_State := STATE_VERIFY;
             END_IF;
 
-        50: (* STATE_VERIFY *)
+        50: 
             IF Batch_Quality_OK AND M201_RunFb AND NOT T301_HighHigh THEN
                 Batch_Accepted := TRUE;
                 Batch_State := STATE_TRANSFER;
@@ -468,7 +463,7 @@ IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergen
                 END_IF;
             END_IF;
 
-        60: (* STATE_TRANSFER *)
+        60: 
             TransferCounter := TransferCounter + 1;
             Cmd_XV201 := TRUE;
             IF NOT XV201_OpenFb THEN
@@ -481,16 +476,14 @@ IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergen
             END_IF;
             IF LIT201_pct <= 10.0 THEN
                 Batch_State := STATE_COMPLETE;
-            (* The simulated 2.0 s first-order valve reaches the 95% open
-               feedback threshold after about 6.0 s. Allow 8.0 s so a healthy
-               valve is not declared failed before its feedback can arrive. *)
+            (* the 2 s valve takes about 6 s to reach 95%; give it 8 s before faulting *)
             ELSIF ValveOpenCounter >= 80 THEN
                 XV201_FailedOpen := TRUE; Batch_State := STATE_FAULTED;
             ELSIF TransferCounter >= 12000 THEN
                 Transfer_Timeout := TRUE; Batch_State := STATE_FAULTED;
             END_IF;
 
-        70: (* STATE_COMPLETE *)
+        70: 
             Batch_Count := Batch_Count + 1;
             Last_Batch_Duration_s := UDINT_TO_UINT(BatchDurationScans / 10);
             BatchDurationScans := 0;
@@ -499,7 +492,7 @@ IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergen
             IF LeadBoosterInternal = 1 THEN LeadBoosterInternal := 2; ELSE LeadBoosterInternal := 1; END_IF;
             Batch_State := STATE_READY;
 
-        900: (* STATE_FAULTED *)
+        900: 
             System_Running := FALSE;
 
         ELSE
@@ -507,7 +500,7 @@ IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergen
     END_CASE;
 END_IF;
 
-(* Manual and maintenance commands retain critical interlocks. *)
+(* manual mode still uses the critical interlocks *)
 IF ((Active_Mode = MODE_MANUAL) OR (Active_Mode = MODE_MAINTENANCE)) AND Comm_Healthy AND NOT Emergency_Stop THEN
     IF P101A_ManualStartReq AND NOT T101_LowLow AND NOT T201_HighHigh AND P101A_Available THEN Cmd_P101A := TRUE; P101A_Speed_pct := 100.0; END_IF;
     IF P101B_ManualStartReq AND NOT T101_LowLow AND NOT T201_HighHigh AND P101B_Available THEN Cmd_P101B := TRUE; P101B_Speed_pct := 100.0; END_IF;
@@ -519,7 +512,7 @@ IF ((Active_Mode = MODE_MANUAL) OR (Active_Mode = MODE_MAINTENANCE)) AND Comm_He
     IF P301B_ManualStartReq AND NOT T301_LowLow AND P301B_Available THEN Cmd_P301B := TRUE; P301B_Speed_pct := 100.0; END_IF;
 END_IF;
 
-(* Distribution pressure PI and booster staging in automatic mode. *)
+(* pressure loop and booster staging *)
 IF (Active_Mode = MODE_AUTO) AND System_Running AND Comm_Healthy AND NOT Emergency_Stop AND NOT T301_LowLow AND NOT Both_Boosters_Unavailable THEN
     Pressure_PI_Enabled := TRUE;
     PressureError := PressureSP_kPa - PIT301_kPa;
@@ -567,7 +560,7 @@ ELSE
     PressureOut_pct := 0.0;
 END_IF;
 
-(* Enforce global safe-state and critical process interlocks. *)
+(* apply the final interlocks before sending outputs *)
 IF NOT Comm_Healthy OR Emergency_Stop OR (Active_Mode = MODE_STOPPED) THEN
     Cmd_P101A := FALSE; Cmd_P101B := FALSE; Cmd_P201 := FALSE;
     Cmd_P301A := FALSE; Cmd_P301B := FALSE; Cmd_M201 := FALSE; Cmd_XV201 := FALSE;
@@ -581,7 +574,7 @@ IF T301_HighHigh THEN Cmd_P201 := FALSE; P201_Speed_pct := 0.0; END_IF;
 IF Concentration_HighHigh OR AIT201_Invalid OR NOT M201_RunFb OR (LIT201_pct < 20.0) THEN DoseOutput_pct := 0.0; END_IF;
 IF NOT XV201_OpenFb THEN Cmd_P201 := FALSE; P201_Speed_pct := 0.0; END_IF;
 
-(* Failed-to-start supervision: 20 scans = 2 seconds. *)
+(* 20 scans = 2 s to see run feedback *)
 IF Cmd_P101A AND NOT P101A_RunFb THEN P101A_StartCounter := P101A_StartCounter + 1; ELSE P101A_StartCounter := 0; END_IF;
 IF Cmd_P101B AND NOT P101B_RunFb THEN P101B_StartCounter := P101B_StartCounter + 1; ELSE P101B_StartCounter := 0; END_IF;
 IF Cmd_P201 AND NOT P201_RunFb THEN P201_StartCounter := P201_StartCounter + 1; ELSE P201_StartCounter := 0; END_IF;
@@ -593,7 +586,7 @@ IF P201_StartCounter >= 20 THEN P201_FailedStart := TRUE; Batch_State := STATE_F
 IF P301A_StartCounter >= 20 THEN P301A_FailedStart := TRUE; LeadBoosterInternal := 2; END_IF;
 IF P301B_StartCounter >= 20 THEN P301B_FailedStart := TRUE; LeadBoosterInternal := 1; END_IF;
 
-(* Runtime accumulation at one-second intervals. *)
+
 RuntimeSubsecond := RuntimeSubsecond + 1;
 IF RuntimeSubsecond >= 10 THEN
     RuntimeSubsecond := 0;
@@ -603,13 +596,13 @@ IF RuntimeSubsecond >= 10 THEN
     IF P301B_RunFb THEN P301B_RuntimeInternal_s := P301B_RuntimeInternal_s + 1; END_IF;
 END_IF;
 
-(* Count rejected batches only on entry to the faulted state. *)
+(* count once on entry to the fault state *)
 IF (Batch_State = STATE_FAULTED) AND (LastState <> STATE_FAULTED) AND (LastState >= STATE_FILL) THEN
     Rejected_Batch_Count := Rejected_Batch_Count + 1;
 END_IF;
 LastState := Batch_State;
 
-(* First-out fault priority. *)
+(* keep the first fault cause *)
 IF FirstOut_Code = 0 THEN
     IF Emergency_Stop THEN FirstOut_Code := 1;
     ELSIF Communication_Fault THEN FirstOut_Code := 2;
@@ -629,7 +622,7 @@ IF FirstOut_Code = 0 THEN
     END_IF;
 END_IF;
 
-(* Alarm words for compact SCADA diagnostics. *)
+
 AlarmWord1Internal := 0;
 IF Emergency_Stop THEN AlarmWord1Internal := AlarmWord1Internal + 1; END_IF;
 IF Communication_Fault THEN AlarmWord1Internal := AlarmWord1Internal + 2; END_IF;
@@ -655,7 +648,7 @@ Alarm_Word_2 := AlarmWord2Internal;
 Any_Alarm := (AlarmWord1Internal <> 0) OR (AlarmWord2Internal <> 0);
 Sequence_Faulted := Batch_State = STATE_FAULTED;
 
-(* Map internal commands and diagnostics to Modbus-visible locations. *)
+
 P101A_StartCmd := Cmd_P101A; P101B_StartCmd := Cmd_P101B; P201_StartCmd := Cmd_P201;
 P301A_StartCmd := Cmd_P301A; P301B_StartCmd := Cmd_P301B; M201_StartCmd := Cmd_M201; XV201_OpenCmd := Cmd_XV201;
 P101A_SpeedCmd := REAL_TO_UINT(P101A_Speed_pct * 10.0);

@@ -1,5 +1,5 @@
 function regs = pack_openplc_plant_registers(LIT101_pct,LIT201_pct,LIT301_pct,FIT101_Lps,FIT201_Lps,FIT301_Lps,AIT201_mgL,PIT301_kPa,heartbeat)
-%PACK_OPENPLC_PLANT_REGISTERS Create HR1-HR9 vector for Modbus Client Write.
+% create hr1-hr9 vector for modbus client write
 regs = zeros(1,9);
 regs(1) = min(max(round(LIT101_pct*10),0),1000);
 regs(2) = min(max(round(LIT201_pct*10),0),1000);

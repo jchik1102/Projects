@@ -1,18 +1,5 @@
 classdef OpenPLCModbusBridge < matlab.System
-    %OPENPLCMODBUSBRIDGE Real-time Modbus bridge for the Simulink plant.
-    %
-    % Inputs
-    %   measurements = [LIT101 LIT201 LIT301 FIT101 FIT201 FIT301 ...
-    %                   AIT201 PIT301]
-    %   feedback     = [P101A P101B P201 P301A P301B XV201_Open ...
-    %                   XV201_Closed]
-    %
-    % Outputs
-    %   analogCommands  = HR101:HR106 in engineering percent
-    %   digitalCommands = C51:C57
-    %   faultInputs     = C251:C254
-    %   commHealthy     = 1 after a successful Modbus exchange
-    %   diagnostics     = HR301:HR317 followed by C151:C181
+    % real-time modbus bridge for the simulink plant
 
     properties (Nontunable)
         Host = '127.0.0.1'
@@ -35,8 +22,7 @@ classdef OpenPLCModbusBridge < matlab.System
 
     methods (Static)
         function [size1, size2, size3, size4, size5] = outputPortSizes()
-            % Keep the declared Simulink port shapes identical to the
-            % explicit row vectors returned by stepImpl.
+            % port shapes need to match the row vectors from stepImpl
             size1 = [1 6];
             size2 = [1 7];
             size3 = [1 4];
@@ -89,15 +75,13 @@ classdef OpenPLCModbusBridge < matlab.System
                 measurements = reshape(double(measurements), 1, 8);
                 feedback = reshape(double(feedback), 1, 7);
 
-                % C252 freezes the concentration transmitter value sent to
-                % the PLC while the physical concentration continues to move.
+                % freeze the sensor reading only; the actual concentration still changes
                 if faultInputs(2) == 0
                     obj.LastAIT201 = measurements(7);
                 end
                 measurements(7) = obj.LastAIT201;
 
-                % C254 freezes the heartbeat so the PLC watchdog can prove
-                % that stale communication forces all commands safe.
+                % hold the heartbeat to trigger the plc watchdog
                 if faultInputs(4) == 0
                     obj.Heartbeat = mod(obj.Heartbeat + 1, 65536);
                 end
@@ -107,10 +91,7 @@ classdef OpenPLCModbusBridge < matlab.System
                     measurements(4), measurements(5), measurements(6), ...
                     measurements(7), measurements(8), obj.Heartbeat);
 
-                % The first five motor feedbacks and both valve feedbacks
-                % come from the physical plant. The current mixer command is
-                % mirrored as mixer running feedback because the first plant
-                % model has no separate mixer actuator dynamics.
+                % mixer feedback follows its command since theres no separate mixer dynamics here
                 digitalFeedback = [ ...
                     feedback(1:5), ...
                     digitalCommands(6), ...
@@ -119,11 +100,7 @@ classdef OpenPLCModbusBridge < matlab.System
                 write(obj.Client, 'holdingregs', 1, holdingRegisters);
                 write(obj.Client, 'coils', 1, double(digitalFeedback));
 
-                % The automated integration demo uses the same Modbus
-                % connection as the plant bridge. This avoids opening a
-                % second MATLAB Modbus client while Simulink is running.
-                % In normal operation the application-data flag is absent,
-                % so Ignition/OpenPLC Editor retain ownership of C101-C106.
+                % reuse the bridge connection for the demo; without the flag, the hmi owns C101-C106
                 obj.ExchangeCount = obj.ExchangeCount + 1;
                 obj.applyActiveTestSequence();
 
@@ -191,17 +168,14 @@ classdef OpenPLCModbusBridge < matlab.System
 
         function [feedthrough1, feedthrough2] = ...
                 isInputDirectFeedthroughImpl(~, ~, ~)
-            % The current measurements and feedback are written during the
-            % same communication update. The physical plant contains state,
-            % so these direct inputs do not create an algebraic loop.
+            % the plant has state, so these direct inputs dont create an algebraic loop
             feedthrough1 = true;
             feedthrough2 = true;
         end
 
         function [stateSize, stateDataType, stateComplexity] = ...
                 getDiscreteStateSpecificationImpl(~, propertyName)
-            % Simulink requires an explicit specification for every
-            % DiscreteState property used by a MATLAB System block.
+            % each DiscreteState needs a size and type for the system block
             switch char(propertyName)
                 case { ...
                         'Heartbeat', ...
@@ -240,7 +214,7 @@ classdef OpenPLCModbusBridge < matlab.System
 
     methods (Static, Access = protected)
         function simulationMode = getSimulateUsingImpl
-            % MATLAB System blocks require this method to be static.
+            % this method needs to be static for the system block
             simulationMode = 'Interpreted execution';
         end
     end
@@ -267,9 +241,7 @@ classdef OpenPLCModbusBridge < matlab.System
                 return;
             end
 
-            % Hold each request high for three 100 ms exchanges so the
-            % independent 100 ms PLC task reliably observes the rising
-            % edge. Low gaps separate the three momentary requests.
+            % hold requests for three 100 ms updates so the plc catches the edge; leave a low gap between them
             requests = zeros(1, 6);
             if obj.ExchangeCount >= 11 && obj.ExchangeCount <= 13
                 requests(3) = 1; % C103: reset
@@ -282,9 +254,7 @@ classdef OpenPLCModbusBridge < matlab.System
         end
 
         function applyStage5RequestSequence(obj)
-            % This commissioning-only sequence is enabled by
-            % run_stage5_full_control_integration. Normal operation never
-            % writes HMI requests or fault-injection coils from the bridge.
+            % only the commissioning run enables this; normal runs leave hmi requests and fault coils alone
             requests = zeros(1, 6);
             if obj.ExchangeCount >= 11 && obj.ExchangeCount <= 13
                 requests(3) = 1; % C103: reset
@@ -295,15 +265,13 @@ classdef OpenPLCModbusBridge < matlab.System
             end
             write(obj.Client, 'coils', 101, requests);
 
-            % HR201-HR205: pressure SP, concentration SP, accelerated
-            % commissioning fill target, mix time, and manual dose output.
+            % HR201-HR205: pressure, concentration, fill target, mix time, manual dose
             if obj.ExchangeCount <= 30
                 write(obj.Client, 'holdingregs', 201, ...
                     [4000 120 500 1 500]);
             end
 
-            % Prove physical standby takeover after the pressure-staging
-            % interval. C251 is asserted from 60.0 to 75.0 seconds.
+            % trip the lead pump from 60 to 75 s to check takeover
             faults = zeros(1, 4);
             if obj.ExchangeCount >= 600 && obj.ExchangeCount <= 750
                 faults(1) = 1;
@@ -319,8 +287,6 @@ classdef OpenPLCModbusBridge < matlab.System
                     logical(getappdata(0, ...
                     'WaterProjectOpenPLCDemoSequence'));
             catch
-                % Application data is diagnostic-only. If it cannot be
-                % queried, leave the production-safe default disabled.
             end
         end
 
@@ -332,8 +298,6 @@ classdef OpenPLCModbusBridge < matlab.System
                     logical(getappdata(0, ...
                     'WaterProjectOpenPLCStage5Sequence'));
             catch
-                % Test application data must never affect production-safe
-                % bridge behavior.
             end
         end
 
@@ -342,8 +306,6 @@ classdef OpenPLCModbusBridge < matlab.System
                 setappdata(0, 'WaterProjectOpenPLCLastError', ...
                     sprintf('%s: %s', ME.identifier, ME.message));
             catch
-                % Do not replace the original communication handling with
-                % an application-data diagnostic failure.
             end
         end
 
@@ -353,7 +315,6 @@ classdef OpenPLCModbusBridge < matlab.System
                     rmappdata(0, 'WaterProjectOpenPLCLastError');
                 end
             catch
-                % Diagnostic cleanup must not interrupt the live loop.
             end
         end
 

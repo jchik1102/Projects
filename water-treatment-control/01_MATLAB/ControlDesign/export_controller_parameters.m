@@ -1,5 +1,5 @@
 function T = export_controller_parameters(P, CTRL, printSummary)
-%EXPORT_CONTROLLER_PARAMETERS Export PLC-ready PI parameters and metrics.
+% export plc-ready pi parameters and metrics
 
 if nargin < 1 || isempty(P), P = initialize_water_plant(false); end
 if nargin < 2 || isempty(CTRL)

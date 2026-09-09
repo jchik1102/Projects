@@ -1,5 +1,5 @@
 function summary = run_all_tests()
-%RUN_ALL_TESTS Build all models and execute the complete v0.2 test suite.
+% build all models and execute the complete v0.2 test suite
 
 startup_project();
 build_water_treatment_plant(true);

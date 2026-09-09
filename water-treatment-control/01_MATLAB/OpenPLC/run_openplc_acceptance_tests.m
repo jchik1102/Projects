@@ -1,7 +1,5 @@
 function results = run_openplc_acceptance_tests()
-%RUN_OPENPLC_ACCEPTANCE_TESTS
-% Execute PLC-only integration tests using forced plant measurements and
-% simulated equipment feedback through Modbus TCP.
+% execute plc-only integration tests using forced plant measurements and simulated equipment feedback through modbus tcp
 
 check_openplc_requirements();
 
@@ -9,24 +7,15 @@ fprintf('\n============================================================\n');
 fprintf(' OPENPLC ACCEPTANCE TESTS\n');
 fprintf('============================================================\n');
 
-% Connect to the OpenPLC Modbus TCP server.
 m = modbus('tcpip', '127.0.0.1', 5020, 'Timeout', 3);
 
-% Attempt a safe stop whenever this function exits.
 cleanup = onCleanup(@() safeStop(m)); %#ok<NASGU>
 
-% Initial HMI setpoints:
-% HR201 = 400.0 kPa pressure setpoint
-% HR202 = 1.20 mg/L concentration setpoint
-% HR203 = 80.0% treatment-tank fill target
-% HR204 = accelerated mixing-time setting
-% HR205 = additional test setting
 write(m, 'holdingregs', 201, [4000 120 800 2 500]);
 
-% Clear only mapped coil ranges.
 write(m, 'coils', 101, zeros(1, 6));  % C101-C106
 
-% C107-C109 are intentionally unmapped.
+% C107-C109 arent mapped, leave them alone
 write(m, 'coils', 110, zeros(1, 9));  % C110-C118
 
 write(m, 'coils', 251, zeros(1, 4));  % C251-C254
@@ -37,9 +26,8 @@ names = strings(4, 1);
 pass = false(4, 1);
 details = strings(4, 1);
 
-%% T1: Communication, automatic mode, and batch-state progression
+%% t1: communication, automatic mode, and batch-state progression
 
-% Establish healthy communications.
 for k = 1:25
     heartbeat = cycle( ...
         m, ...
@@ -48,13 +36,12 @@ for k = 1:25
         true);
 end
 
-% C104 = Automatic-mode request.
+% = automatic-mode request
 pulse(m, 104);
 
-% C101 = System-start request.
+% = system-start request
 pulse(m, 101);
 
-% Allow the state machine to enter Ready or Fill.
 for k = 1:8
     heartbeat = cycle( ...
         m, ...
@@ -65,7 +52,6 @@ end
 
 state1 = read(m, 'holdingregs', 301, 1);
 
-% Force T-201 to the 80% batch-fill target.
 for k = 1:5
     heartbeat = cycle( ...
         m, ...
@@ -76,8 +62,6 @@ end
 
 state2 = read(m, 'holdingregs', 301, 1);
 
-% Force concentration to 1.20 mg/L for over 20 seconds.
-% Mixer feedback is mirrored from the PLC command.
 for k = 1:210
     heartbeat = cycle( ...
         m, ...
@@ -88,7 +72,6 @@ end
 
 state3 = read(m, 'holdingregs', 301, 1);
 
-% Allow additional time for Mix/Verify/Transfer transitions.
 for k = 1:30
     heartbeat = cycle( ...
         m, ...
@@ -99,7 +82,6 @@ end
 
 state4 = read(m, 'holdingregs', 301, 1);
 
-% Simulate transfer flow and mirror valve/pump feedback.
 for k = 1:10
     heartbeat = cycle( ...
         m, ...
@@ -108,8 +90,6 @@ for k = 1:10
         true);
 end
 
-% Force the treatment tank to its transfer-complete level and increase the
-% clean-water tank level.
 for k = 1:5
     heartbeat = cycle( ...
         m, ...
@@ -137,18 +117,18 @@ details(1) = sprintf( ...
     state4, ...
     batchCount);
 
-%% Reset and restart before the pressure tests
+%% reset and restart before the pressure tests
 
-% C102 = Stop request.
+% = stop request
 pulse(m, 102);
 
-% C103 = Reset request.
+% = reset request
 pulse(m, 103);
 
-% C104 = Automatic-mode request.
+% = automatic-mode request
 pulse(m, 104);
 
-% C101 = Start request.
+% = start request
 pulse(m, 101);
 
 for k = 1:12
@@ -159,10 +139,8 @@ for k = 1:12
         true);
 end
 
-%% T2: Pressure PI and booster staging request
+%% t2: pressure pi and booster staging request
 
-% Force a high-demand, low-pressure condition:
-% 60.0 L/s demand and 340.0 kPa measured pressure.
 for k = 1:40
     heartbeat = cycle( ...
         m, ...
@@ -186,9 +164,9 @@ details(2) = sprintf( ...
     boosterCommands(1), ...
     boosterCommands(2));
 
-%% T3: Lead-booster failure and standby takeover
+%% t3: lead-booster failure and standby takeover
 
-% C251 = P-301A trip fault.
+% = p-301a trip fault
 write(m, 'coils', 251, 1);
 
 for k = 1:15
@@ -214,13 +192,10 @@ details(3) = sprintf( ...
     boosterAfterTrip(1), ...
     boosterAfterTrip(2));
 
-% Clear the P-301A trip fault.
 write(m, 'coils', 251, 0);
 
-%% T4: Communication-loss safe state
+%% t4: communication-loss safe state
 
-% Continue writing the same heartbeat value so that the PLC detects stale
-% communication. Do not increment heartbeat in this test.
 for k = 1:25
     write( ...
         m, ...
@@ -245,7 +220,7 @@ details(4) = sprintf( ...
     communicationFault, ...
     sum(physicalCommands));
 
-%% Final results
+%% final results
 
 results = table( ...
     names, ...
@@ -265,17 +240,15 @@ end
 
 
 function heartbeat = cycle(m, heartbeat, registers, mirrorFeedback)
-%CYCLE Perform one simulated plant/PLC communication cycle.
+% perform one simulated plant/plc communication cycle
 
 registers(9) = heartbeat;
 
 write(m, 'holdingregs', 1, registers);
 
 if mirrorFeedback
-    % Read PLC output commands C51-C57.
     commands = read(m, 'coils', 51, 7);
 
-    % Mirror commands into simulated plant feedback C1-C8.
     feedback = [
         commands(1:6), ...
         commands(7), ...
@@ -293,7 +266,7 @@ end
 
 
 function pulse(m, address)
-%PULSE Generate a momentary Modbus coil command.
+% generate a momentary modbus coil command
 
 write(m, 'coils', address, 1);
 pause(0.15);
@@ -305,13 +278,12 @@ end
 
 
 function safeStop(m)
-%SAFESTOP Attempt to stop the process when the test ends.
+% attempt to stop the process when the test ends
 
 try
-    % C102 = System stop request.
+    % = system stop request
     pulse(m, 102);
 catch
-    % Do not replace the original test error with a cleanup error.
 end
 
 end

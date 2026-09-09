@@ -1,5 +1,5 @@
 function T = export_openplc_gain_constants()
-%EXPORT_OPENPLC_GAIN_CONSTANTS Print exact constants from MATLAB's pidtune design.
+% print exact constants from matlab's pidtune design
 P=initialize_water_plant(false); M=derive_plant_models(P,false);
 CTRL=design_all_controllers(P,M,false);
 T=table(["PRESSURE_KP";"PRESSURE_KI_TS";"PRESSURE_BIAS_PCT";"CONCENTRATION_KP";"CONCENTRATION_KI_TS"], ...

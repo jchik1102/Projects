@@ -1,5 +1,5 @@
 function D = design_pressure_controller(P, M, makePlots)
-%DESIGN_PRESSURE_CONTROLLER Tune and validate the pressure PI controller.
+% tune and validate the pressure pi controller
 
 if nargin < 1 || isempty(P), P = initialize_water_plant(false); end
 if nargin < 2 || isempty(M), M = derive_plant_models(P, false); end
@@ -18,7 +18,6 @@ Tdemand = minreal(M.pressure.demand*S);
 [Gm, Pm, Wcg, Wcp] = margin(L);
 refInfo = stepinfo(Tref, 'SettlingTimeThreshold', 0.02);
 
-% 30 L/s demand increase from the nominal operating point.
 t = (0:0.02:30).';
 deltaDemand = (P.pressure.highDemand_Lps-P.pressure.nominalDemand_Lps)*ones(size(t));
 deltaPressure = lsim(Tdemand, deltaDemand, t);

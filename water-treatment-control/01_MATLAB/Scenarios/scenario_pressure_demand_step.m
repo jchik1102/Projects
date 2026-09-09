@@ -1,5 +1,5 @@
 function S = scenario_pressure_demand_step()
-%SCENARIO_PRESSURE_DEMAND_STEP Initial pressure-controller validation scenario.
+% initial pressure-controller validation scenario
 P=initialize_water_plant(false);
 S.name='Pressure demand step'; S.stopTime_s=60; S.stepTime_s=20;
 S.initialDemand_Lps=P.pressure.nominalDemand_Lps;

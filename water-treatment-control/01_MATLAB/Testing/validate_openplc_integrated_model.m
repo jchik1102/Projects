@@ -1,5 +1,5 @@
 function results = validate_openplc_integrated_model(model, printSummary)
-%VALIDATE_OPENPLC_INTEGRATED_MODEL Static structure check for the v0.4 model.
+% static structure check for the v0.4 model
 
 if nargin < 1 || isempty(model)
     model = 'Water_Treatment_Plant_OpenPLC_v0_4';

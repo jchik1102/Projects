@@ -1,5 +1,5 @@
 function modelFiles = build_controller_test_models(forceRebuild)
-%BUILD_CONTROLLER_TEST_MODELS Generate pressure and concentration PI test models.
+% generate pressure and concentration pi test models
 
 if nargin < 1, forceRebuild = false; end
 thisDir = fileparts(mfilename('fullpath'));

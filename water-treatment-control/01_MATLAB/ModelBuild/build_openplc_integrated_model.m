@@ -1,11 +1,5 @@
 function modelFile = build_openplc_integrated_model(forceRebuild)
-%BUILD_OPENPLC_INTEGRATED_MODEL Generate the closed-loop Simulink/OpenPLC model.
-%
-% build_openplc_integrated_model(true) rebuilds the integrated model from
-% the validated standalone Water_Treatment_Plant model.
-%
-% The generated model uses OpenPLCModbusBridge in Normal simulation mode.
-% Simulink owns the physical plant and OpenPLC owns all operational control.
+% generate the closed-loop simulink/openplc model
 
 if nargin < 1
     forceRebuild = false;
@@ -52,8 +46,6 @@ localCloseModel(baseName);
 copyfile(baseFile, modelFile, 'f');
 load_system(modelFile);
 
-% Remove standalone actuator command sources. Disturbances and equipment
-% availability profiles remain From Workspace signals.
 commandSources = { ...
     'cmd_P101A', 'cmd_P101B', 'cmd_P201', ...
     'cmd_P301A', 'cmd_P301B', 'cmd_DP201', ...
@@ -62,8 +54,6 @@ for k = 1:numel(commandSources)
     localDeleteBlock([modelName '/' commandSources{k}]);
 end
 
-% Remove feedback terminators; their source signals are connected to the
-% communication feedback vector below.
 feedbackTerminators = { ...
     'Term_P101A_RunFb', 'Term_P101B_RunFb', ...
     'Term_P201_RunFb', ...
@@ -74,7 +64,6 @@ for k = 1:numel(feedbackTerminators)
     localDeleteBlock([modelName '/' feedbackTerminators{k}]);
 end
 
-% Plant measurements sent to HR1-HR8.
 add_block('simulink/Signal Routing/Mux', ...
     [modelName '/OpenPLC_Measurements'], ...
     'Inputs', '8', ...
@@ -94,8 +83,7 @@ for k = 1:numel(measurementSources)
         sprintf('OpenPLC_Measurements/%d', k), 'autorouting', 'on');
 end
 
-% Physical feedback sent to C1-C5 and C7-C8. Mixer feedback C6 is mirrored
-% from the PLC mixer command inside OpenPLCModbusBridge.
+% C1-C5 and C7-C8 come from the plant; the bridge mirrors the mixer command into C6
 add_block('simulink/Signal Routing/Mux', ...
     [modelName '/OpenPLC_Feedback'], ...
     'Inputs', '7', ...
@@ -120,7 +108,6 @@ add_line(modelName, 'OpenPLC_Measurements/1', ...
 add_line(modelName, 'OpenPLC_Feedback/1', ...
     'OpenPLC_Communication/2', 'autorouting', 'on');
 
-% Split the bridge vectors so the actuator conditioning remains explicit.
 add_block('simulink/Signal Routing/Demux', ...
     [modelName '/OpenPLC_Analog_Demux'], ...
     'Outputs', '6', ...
@@ -145,8 +132,7 @@ localAddCommandTags(modelName);
 localAddConditionedActuatorCommands(modelName);
 localAddIntegrationLogging(modelName);
 
-% Normal mode and wall-clock pacing are required because OpenPLC timers use
-% real time while Simulink otherwise runs faster than real time.
+% use normal mode and 1x pacing since the plc timers run in real time
 set_param(modelName, ...
     'SimulationMode', 'normal', ...
     'SolverType', 'Fixed-step', ...
@@ -189,10 +175,7 @@ add_block('simulink/User-Defined Functions/MATLAB System', ...
     'System', 'OpenPLCModbusBridge', ...
     'Position', [105 65 285 190]);
 
-% Do not set the block's SimulateUsing mask parameter here. The System
-% object declares interpreted execution through getSimulateUsingImpl, which
-% makes SimulateUsing read-only in MATLAB R2026a. The generated block still
-% reports "Interpreted execution", and the structural validator checks it.
+% dont set SimulateUsing here; getSimulateUsingImpl already sets it and R2026a makes it read-only
 add_block('simulink/Ports & Subsystems/Out1', [path '/AnalogCmd'], ...
     'Port', '1', 'Position', [345 55 375 75]);
 add_block('simulink/Ports & Subsystems/Out1', [path '/DigitalCmd'], ...
@@ -262,7 +245,6 @@ end
 
 
 function localAddConditionedActuatorCommands(modelName)
-% Each pump receives speed only when its matching PLC start coil is true.
 localAddProductCommand(modelName, ...
     'PLC_P101A_Command', {'PLC_P101A_SPEED', 'PLC_P101A_START'}, ...
     [165 125 205 175], 'P101A_Actuator/1');
@@ -276,8 +258,7 @@ localAddProductCommand(modelName, ...
     'PLC_P301B_Command', {'PLC_P301B_SPEED', 'PLC_P301B_START'}, ...
     [965 315 1005 365], 'P301B_Actuator/1');
 
-% A P-301A trip and an XV-201 stuck-closed injection must also affect the
-% simulated physical devices, not only the PLC alarm logic.
+% apply these faults to the simulated equipment as well as the plc inputs
 localAddNotFromTag(modelName, ...
     'FAULT_P301A_TRIP', 'P301A_NotTripped', [860 175 900 205]);
 localAddProductCommand(modelName, ...
@@ -291,7 +272,6 @@ localAddProductCommand(modelName, ...
     'PLC_XV201_Command', {'PLC_XV201_OPEN', 'XV201_NotStuck/1'}, ...
     [650 650 690 700], 'XV201_Valve/1');
 
-% Dosing output and mixer command do not need an additional start gate.
 localAddFromTag(modelName, 'PLC_DP201_OUTPUT', ...
     'From_PLC_DP201_OUTPUT', [565 355 705 375]);
 localDisconnectInput(modelName, 'Treatment_Concentration/1');
@@ -326,9 +306,7 @@ for k = 1:numel(inputs)
     add_line(modelName, sourcePort, ...
         sprintf('%s/%d', blockName, k), 'autorouting', 'on');
 end
-% Deleting a source block can leave its old signal line connected to the
-% destination port. Remove that line explicitly before installing the PLC
-% command so this builder works consistently across Simulink releases.
+% remove the old signal line too, otherwise the new connection can fail
 localDisconnectInput(modelName, destination);
 add_line(modelName, [blockName '/1'], destination, 'autorouting', 'on');
 end

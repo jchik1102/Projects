@@ -1,5 +1,5 @@
 function S = scenario_concentration_setpoint()
-%SCENARIO_CONCENTRATION_SETPOINT Initial dosing-loop validation scenario.
+% initial dosing-loop validation scenario
 P=initialize_water_plant(false);
 S.name='Concentration setpoint tracking'; S.stopTime_s=160;
 S.setpoint_mgL=P.concentration.setpoint_mgL;

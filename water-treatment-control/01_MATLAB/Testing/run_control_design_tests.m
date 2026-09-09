@@ -1,5 +1,5 @@
 function results = run_control_design_tests()
-%RUN_CONTROL_DESIGN_TESTS Verify toolbox-based pressure and concentration PI designs.
+% verify toolbox-based pressure and concentration pi designs
 
 fprintf('\n============================================================\n');
 fprintf(' STAGE 2 CONTROL SYSTEM TOOLBOX DESIGN TESTS\n');

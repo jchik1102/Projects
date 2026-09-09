@@ -1,5 +1,5 @@
 function U = create_default_inputs(stopTime_s, assignToBase)
-%CREATE_DEFAULT_INPUTS Create deterministic standalone-plant inputs.
+% create standalone-plant inputs
 
 if nargin < 1 || isempty(stopTime_s)
     stopTime_s = 120;
