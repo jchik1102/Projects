@@ -1,0 +1,103 @@
+Address,OpenPLC_Location,Tag,Direction,DataType,Scaling,Units,Description,Owner
+HR001,%QW0,LIT101_PV,Simulink_to_PLC,UINT16,% x10,%,Raw-water tank level,Simulink
+HR002,%QW1,LIT201_PV,Simulink_to_PLC,UINT16,% x10,%,Treatment-tank level,Simulink
+HR003,%QW2,LIT301_PV,Simulink_to_PLC,UINT16,% x10,%,Clean-water tank level,Simulink
+HR004,%QW3,FIT101_PV,Simulink_to_PLC,UINT16,L/s x10,L/s,Raw transfer flow,Simulink
+HR005,%QW4,FIT201_PV,Simulink_to_PLC,UINT16,L/s x10,L/s,Treatment transfer flow,Simulink
+HR006,%QW5,FIT301_PV,Simulink_to_PLC,UINT16,L/s x10,L/s,Distribution demand,Simulink
+HR007,%QW6,AIT201_PV,Simulink_to_PLC,UINT16,mg/L x100,mg/L,Measured treatment concentration,Simulink
+HR008,%QW7,PIT301_PV,Simulink_to_PLC,UINT16,kPa x10,kPa,Measured distribution pressure,Simulink
+HR009,%QW8,Plant_Heartbeat,Simulink_to_PLC,UINT16,count,count,Incrementing Simulink heartbeat,Simulink
+HR101,%QW100,P101A_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-101A speed command,OpenPLC
+HR102,%QW101,P101B_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-101B speed command,OpenPLC
+HR103,%QW102,P201_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-201 speed command,OpenPLC
+HR104,%QW103,P301A_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-301A speed command,OpenPLC
+HR105,%QW104,P301B_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-301B speed command,OpenPLC
+HR106,%QW105,DP201_Output,PLC_to_Simulink,UINT16,% x10,%,Dosing-pump output,OpenPLC
+HR201,%QW200,Pressure_SP,Ignition_or_Test_to_PLC,UINT16,kPa x10,kPa,Pressure setpoint,Ignition/MATLAB
+HR202,%QW201,Concentration_SP,Ignition_or_Test_to_PLC,UINT16,mg/L x100,mg/L,Concentration setpoint,Ignition/MATLAB
+HR203,%QW202,BatchFill_SP,Ignition_or_Test_to_PLC,UINT16,% x10,%,Treatment fill target,Ignition/MATLAB
+HR204,%QW203,MixTime_SP,Ignition_or_Test_to_PLC,UINT16,s,s,Mixing time,Ignition/MATLAB
+HR205,%QW204,Manual_Dose_Output,Ignition_or_Test_to_PLC,UINT16,% x10,%,Manual/maintenance dosing output,Ignition/MATLAB
+HR301,%QW300,Batch_State,PLC_to_Ignition,UINT16,integer,state,Active batch state,OpenPLC
+HR302,%QW301,Batch_Count,PLC_to_Ignition,UINT16,integer,count,Completed batch count,OpenPLC
+HR303,%QW302,Rejected_Batch_Count,PLC_to_Ignition,UINT16,integer,count,Rejected batch count,OpenPLC
+HR304,%QW303,Pressure_PI_Output,PLC_to_Ignition,UINT16,% x10,%,Total booster demand,OpenPLC
+HR305,%QW304,Concentration_PI_Output,PLC_to_Ignition,UINT16,% x10,%,Dosing controller output,OpenPLC
+HR306,%QW305,Active_Mode,PLC_to_Ignition,UINT16,integer,mode,"0 stopped, 1 auto, 2 manual, 3 maintenance",OpenPLC
+HR307,%QW306,Requested_Mode,PLC_to_Ignition,UINT16,integer,mode,Requested operating mode,OpenPLC
+HR308,%QW307,Lead_Booster,PLC_to_Ignition,UINT16,integer,pump,"1 P-301A, 2 P-301B",OpenPLC
+HR309,%QW308,FirstOut_Code,PLC_to_Ignition,UINT16,integer,code,First-out fault code,OpenPLC
+HR310,%QW309,Alarm_Word_1,PLC_to_Ignition,UINT16,bit field,word,Alarm summary word 1,OpenPLC
+HR311,%QW310,Alarm_Word_2,PLC_to_Ignition,UINT16,bit field,word,Alarm summary word 2,OpenPLC
+HR312,%QW311,P101A_Runtime_s,PLC_to_Ignition,UINT16,s,s,P-101A accumulated runtime,OpenPLC
+HR313,%QW312,P101B_Runtime_s,PLC_to_Ignition,UINT16,s,s,P-101B accumulated runtime,OpenPLC
+HR314,%QW313,P301A_Runtime_s,PLC_to_Ignition,UINT16,s,s,P-301A accumulated runtime,OpenPLC
+HR315,%QW314,P301B_Runtime_s,PLC_to_Ignition,UINT16,s,s,P-301B accumulated runtime,OpenPLC
+HR316,%QW315,Batch_Retry_Count,PLC_to_Ignition,UINT16,integer,count,Current batch treatment retries,OpenPLC
+HR317,%QW316,Last_Batch_Duration_s,PLC_to_Ignition,UINT16,s,s,Duration of last completed batch,OpenPLC
+C001,%QX0.0,P101A_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-101A running feedback,Simulink
+C002,%QX0.1,P101B_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-101B running feedback,Simulink
+C003,%QX0.2,P201_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-201 running feedback,Simulink
+C004,%QX0.3,P301A_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-301A running feedback,Simulink
+C005,%QX0.4,P301B_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-301B running feedback,Simulink
+C006,%QX0.5,M201_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,Mixer running feedback,Simulink
+C007,%QX0.6,XV201_OpenFb,Simulink_to_PLC,BOOL,Boolean,bool,Treatment outlet valve open feedback,Simulink
+C008,%QX0.7,XV201_ClosedFb,Simulink_to_PLC,BOOL,Boolean,bool,Treatment outlet valve closed feedback,Simulink
+C051,%QX6.2,P101A_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-101A start command,OpenPLC
+C052,%QX6.3,P101B_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-101B start command,OpenPLC
+C053,%QX6.4,P201_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-201 start command,OpenPLC
+C054,%QX6.5,P301A_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-301A start command,OpenPLC
+C055,%QX6.6,P301B_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-301B start command,OpenPLC
+C056,%QX6.7,M201_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,Mixer start command,OpenPLC
+C057,%QX7.0,XV201_OpenCmd,PLC_to_Simulink,BOOL,Boolean,bool,Treatment outlet valve open command,OpenPLC
+C101,%QX12.4,System_StartReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Automatic system start request,Ignition/MATLAB
+C102,%QX12.5,System_StopReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,System stop request,Ignition/MATLAB
+C103,%QX12.6,System_ResetReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Fault/reset request,Ignition/MATLAB
+C104,%QX12.7,Auto_ModeReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Automatic mode request,Ignition/MATLAB
+C105,%QX13.0,Manual_ModeReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual mode request,Ignition/MATLAB
+C106,%QX13.1,Maintenance_ModeReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Maintenance mode request,Ignition/MATLAB
+C110,%QX13.5,Emergency_Stop,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Emergency stop input,Ignition/MATLAB
+C111,%QX13.6,P101A_ManualStartReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual P-101A request,Ignition/MATLAB
+C112,%QX13.7,P101B_ManualStartReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual P-101B request,Ignition/MATLAB
+C113,%QX14.0,P201_ManualStartReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual P-201 request,Ignition/MATLAB
+C114,%QX14.1,P301A_ManualStartReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual P-301A request,Ignition/MATLAB
+C115,%QX14.2,P301B_ManualStartReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual P-301B request,Ignition/MATLAB
+C116,%QX14.3,DP201_ManualEnableReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual dosing enable,Ignition/MATLAB
+C117,%QX14.4,M201_ManualStartReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual mixer request,Ignition/MATLAB
+C118,%QX14.5,XV201_ManualOpenReq,Ignition_or_Test_to_PLC,BOOL,Boolean,bool,Manual valve-open request,Ignition/MATLAB
+C151,%QX18.6,Comm_Healthy,PLC_to_Ignition,BOOL,Boolean,bool,Simulink heartbeat healthy,OpenPLC
+C152,%QX18.7,System_Running,PLC_to_Ignition,BOOL,Boolean,bool,Automatic system run latch,OpenPLC
+C153,%QX19.0,Batch_Accepted,PLC_to_Ignition,BOOL,Boolean,bool,Current batch quality accepted,OpenPLC
+C154,%QX19.1,P101A_Available,PLC_to_Ignition,BOOL,Boolean,bool,P-101A available,OpenPLC
+C155,%QX19.2,P101B_Available,PLC_to_Ignition,BOOL,Boolean,bool,P-101B available,OpenPLC
+C156,%QX19.3,P301A_Available,PLC_to_Ignition,BOOL,Boolean,bool,P-301A available,OpenPLC
+C157,%QX19.4,P301B_Available,PLC_to_Ignition,BOOL,Boolean,bool,P-301B available,OpenPLC
+C158,%QX19.5,Pressure_PI_Enabled,PLC_to_Ignition,BOOL,Boolean,bool,Pressure PI enabled,OpenPLC
+C159,%QX19.6,Concentration_PI_Enabled,PLC_to_Ignition,BOOL,Boolean,bool,Concentration PI enabled,OpenPLC
+C160,%QX19.7,P301A_Lead,PLC_to_Ignition,BOOL,Boolean,bool,P-301A selected lead,OpenPLC
+C161,%QX20.0,P301B_Lead,PLC_to_Ignition,BOOL,Boolean,bool,P-301B selected lead,OpenPLC
+C162,%QX20.1,Any_Alarm,PLC_to_Ignition,BOOL,Boolean,bool,At least one alarm active,OpenPLC
+C163,%QX20.2,Sequence_Faulted,PLC_to_Ignition,BOOL,Boolean,bool,Batch sequence in state 900,OpenPLC
+C164,%QX20.3,Batch_Quality_OK,PLC_to_Ignition,BOOL,Boolean,bool,Concentration is within acceptance band,OpenPLC
+C165,%QX20.4,T101_LowLow,PLC_to_Ignition,BOOL,Boolean,bool,T-101 low-low alarm,OpenPLC
+C166,%QX20.5,T201_HighHigh,PLC_to_Ignition,BOOL,Boolean,bool,T-201 high-high alarm,OpenPLC
+C167,%QX20.6,T301_LowLow,PLC_to_Ignition,BOOL,Boolean,bool,T-301 low-low alarm,OpenPLC
+C168,%QX20.7,T301_HighHigh,PLC_to_Ignition,BOOL,Boolean,bool,T-301 high-high alarm,OpenPLC
+C169,%QX21.0,Concentration_HighHigh,PLC_to_Ignition,BOOL,Boolean,bool,Concentration high-high alarm,OpenPLC
+C170,%QX21.1,Pressure_Low,PLC_to_Ignition,BOOL,Boolean,bool,Distribution pressure low alarm,OpenPLC
+C171,%QX21.2,Pressure_High,PLC_to_Ignition,BOOL,Boolean,bool,Distribution pressure high alarm,OpenPLC
+C172,%QX21.3,P301A_FailedStart,PLC_to_Ignition,BOOL,Boolean,bool,P-301A failed-start alarm,OpenPLC
+C173,%QX21.4,P301B_FailedStart,PLC_to_Ignition,BOOL,Boolean,bool,P-301B failed-start alarm,OpenPLC
+C174,%QX21.5,P201_FailedStart,PLC_to_Ignition,BOOL,Boolean,bool,P-201 failed-start alarm,OpenPLC
+C175,%QX21.6,XV201_FailedOpen,PLC_to_Ignition,BOOL,Boolean,bool,XV-201 failed-open alarm,OpenPLC
+C176,%QX21.7,Communication_Fault,PLC_to_Ignition,BOOL,Boolean,bool,Plant communication watchdog alarm,OpenPLC
+C177,%QX22.0,Both_Boosters_Unavailable,PLC_to_Ignition,BOOL,Boolean,bool,No booster pump available,OpenPLC
+C178,%QX22.1,Dosing_Timeout,PLC_to_Ignition,BOOL,Boolean,bool,Treatment dosing timeout,OpenPLC
+C179,%QX22.2,Fill_Timeout,PLC_to_Ignition,BOOL,Boolean,bool,Treatment fill timeout,OpenPLC
+C180,%QX22.3,Transfer_Timeout,PLC_to_Ignition,BOOL,Boolean,bool,Treatment transfer timeout,OpenPLC
+C181,%QX22.4,AIT201_Invalid,PLC_to_Ignition,BOOL,Boolean,bool,Concentration signal implausible/frozen,OpenPLC
+C251,%QX31.2,Fault_P301A_Trip,Test_to_Simulink_or_PLC,BOOL,Boolean,bool,Lead booster trip injection,MATLAB/Ignition
+C252,%QX31.3,Fault_AIT201_Freeze,Test_to_Simulink_or_PLC,BOOL,Boolean,bool,Concentration sensor freeze injection,MATLAB/Ignition
+C253,%QX31.4,Fault_XV201_StuckClosed,Test_to_Simulink_or_PLC,BOOL,Boolean,bool,Outlet valve stuck-closed injection,MATLAB/Ignition
+C254,%QX31.5,Fault_CommsLoss,Test_to_Simulink_or_PLC,BOOL,Boolean,bool,Communication-loss injection,MATLAB/Ignition

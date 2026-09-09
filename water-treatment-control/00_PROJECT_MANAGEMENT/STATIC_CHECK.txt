@@ -1,0 +1,27 @@
+Static file-generation check only; MATLAB execution is still required.
+START_HERE.m: functions=0, end-lines=0
+01_MATLAB/Utilities/execute_test_group.m: functions=1, end-lines=2
+01_MATLAB/Utilities/assert_all_tests_pass.m: functions=1, end-lines=2
+01_MATLAB/Core/check_toolboxes.m: functions=2, end-lines=6
+01_MATLAB/Core/define_register_map.m: functions=1, end-lines=7
+01_MATLAB/Core/create_default_inputs.m: functions=1, end-lines=4
+01_MATLAB/Core/startup_project.m: functions=1, end-lines=1
+01_MATLAB/Core/initialize_water_plant.m: functions=1, end-lines=3
+01_MATLAB/Testing/run_all_tests.m: functions=2, end-lines=3
+01_MATLAB/Testing/open_simulink_test_manager.m: functions=1, end-lines=2
+01_MATLAB/Testing/run_simulink_controller_tests.m: functions=11, end-lines=13
+01_MATLAB/Testing/run_simulink_plant_tests.m: functions=16, end-lines=23
+01_MATLAB/Testing/run_matlab_foundation_tests.m: functions=7, end-lines=8
+01_MATLAB/Testing/run_control_design_tests.m: functions=9, end-lines=9
+01_MATLAB/Scenarios/scenario_pressure_demand_step.m: functions=1, end-lines=1
+01_MATLAB/Scenarios/run_demo_scenario.m: functions=1, end-lines=1
+01_MATLAB/Scenarios/scenario_concentration_setpoint.m: functions=1, end-lines=1
+01_MATLAB/ModelBuild/build_controller_test_models.m: functions=5, end-lines=6
+01_MATLAB/ModelBuild/build_water_treatment_plant.m: functions=10, end-lines=16
+01_MATLAB/ControlDesign/export_controller_parameters.m: functions=1, end-lines=3
+01_MATLAB/ControlDesign/optional_linearization_check.m: functions=2, end-lines=2
+01_MATLAB/ControlDesign/derive_plant_models.m: functions=1, end-lines=4
+01_MATLAB/ControlDesign/design_all_controllers.m: functions=1, end-lines=2
+01_MATLAB/ControlDesign/design_pressure_controller.m: functions=2, end-lines=4
+01_MATLAB/ControlDesign/design_concentration_controller.m: functions=1, end-lines=2
+01_MATLAB/ControlDesign/generate_control_design_plots.m: functions=1, end-lines=1

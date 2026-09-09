@@ -1,0 +1,6 @@
+OpenPLC_Constant,Value,Units,ValidationBasis
+PRESSURE_KP,0.1721,% per kPa,Stage 2 pressure model and Stage 5 live plant
+PRESSURE_KI_TS,0.01033,% per kPa per execution,0.10 s OpenPLC execution
+PRESSURE_BIAS_PCT,91.6667,%,Nominal 30 L/s demand operating point
+CONCENTRATION_KP,100.0,% per mg/L,Nonlinear mass-balance commissioning
+CONCENTRATION_KI_TS,0.10,% per mg/L per execution,0.50 s OpenPLC execution with saturation and sensor lag

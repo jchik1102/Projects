@@ -1,0 +1,11 @@
+Water Treatment Control Project v0.4.2 static regression check
+
+Verified before packaging:
+- build_openplc_integrated_model.m no longer assigns the read-only
+  SimulateUsing mask parameter when adding OpenPLCModbusBridge.
+- OpenPLCModbusBridge.m retains static protected getSimulateUsingImpl and
+  returns "Interpreted execution".
+- validate_openplc_integrated_model.m still verifies that the generated block
+  reports interpreted execution.
+- The v0.4.1 destination-port disconnection fix remains present.
+- MATLAB/Simulink execution must be verified on the target R2026a installation.

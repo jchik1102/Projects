@@ -1,0 +1,7 @@
+{
+  "title": "Water Treatment SCADA",
+  "description": "Automated water-treatment SCADA v0.6.1 using Ignition 8.3, OpenPLC, and Simulink",
+  "enabled": true,
+  "inheritable": false,
+  "parent": ""
+}

@@ -1,0 +1,1798 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Title"
+        },
+        "type": "ia.display.view",
+        "props": {
+          "params": {
+            "icon": "science",
+            "text": "Treatment Detail"
+          },
+          "path": "Page/Embedded/Title"
+        },
+        "position": {
+          "basis": "56px",
+          "shrink": 0
+        }
+      },
+      {
+        "meta": {
+          "name": "TreatmentContent"
+        },
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "wrap": "nowrap",
+          "style": {
+            "paddingBottom": "12px",
+            "paddingLeft": "16px",
+            "paddingRight": "16px"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "meta": {
+              "name": "TreatmentMetricsSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "TreatmentMetricsSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Treatment Process",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "TreatmentMetrics"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "TreatmentLevel"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "TreatmentLevelTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "T-201 Level",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "TreatmentLevelValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- %",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Plant/T201/LIT201_PV"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.1f} %\").format(float(value))\n\texcept:\n\t    return \"-- %\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "ConcentrationPV"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "ConcentrationPVTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Concentration PV",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "ConcentrationPVValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- mg/L",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Plant/T201/AIT201_PV"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.2f} mg/L\").format(float(value))\n\texcept:\n\t    return \"-- mg/L\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "ConcentrationSP"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "ConcentrationSPTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Concentration SP",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "ConcentrationSPValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- mg/L",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/ConcentrationPI/Concentration_SP"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.2f} mg/L\").format(float(value))\n\texcept:\n\t    return \"-- mg/L\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DoseOutput"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DoseOutputTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Dosing Output",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DoseOutputValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- %",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/DP201/DP201_Output"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.1f} %\").format(float(value))\n\texcept:\n\t    return \"-- %\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "BatchRetries"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "BatchRetriesTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Batch Retry Count",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "BatchRetriesValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/Batch/Batch_Retry_Count"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.0f}\").format(float(value))\n\texcept:\n\t    return \"--\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "LastBatchDuration"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LastBatchDurationTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Last Batch Duration",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "LastBatchDurationValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- s",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/Batch/Last_Batch_Duration_s"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.0f} s\").format(float(value))\n\texcept:\n\t    return \"-- s\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "TreatmentStatus"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "TreatmentBatchState"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "TreatmentBatchStateTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Batch State",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "TreatmentBatchStateValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/Batch/Batch_State"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tvalues = {0: 'STOPPED', 10: 'READY', 20: 'FILL', 30: 'DOSE', 40: 'MIX', 50: 'VERIFY', 60: 'TRANSFER', 70: 'COMPLETE', 900: 'FAULTED'}\n\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\ttry:\n\t    return values.get(int(value), \"VALUE \" + str(value))\n\texcept:\n\t    return \"UNKNOWN\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MixerCommand"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MixerCommandTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Mixer Command",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MixerCommandValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/M201/M201_StartCmd"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"START\" if bool(value) else \"STOP\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MixerFeedback"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MixerFeedbackTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Mixer Feedback",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MixerFeedbackValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/M201/M201_RunFb"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"RUNNING\" if bool(value) else \"STOPPED\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "BatchQuality"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "BatchQualityTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Quality Band",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "BatchQualityValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/Batch/Batch_Quality_OK"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"IN BAND\" if bool(value) else \"OUT OF BAND\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "BatchAccepted"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "BatchAcceptedTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Batch Result",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "BatchAcceptedValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/Batch/Batch_Accepted"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ACCEPTED\" if bool(value) else \"NOT ACCEPTED\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "TreatmentControlSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "TreatmentControlSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Validated Setpoint Adjustments",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              },
+              {
+                "meta": {
+                  "name": "TreatmentControlSectionSubtitle",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Project script clamps values to the PLC's documented engineering limits.",
+                  "style": {
+                    "color": "#627d98",
+                    "fontSize": "12px"
+                  }
+                },
+                "position": {
+                  "basis": "22px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "ConcentrationSetpointControls"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "ConcentrationDown"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Concentration SP -0.05",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#006d75",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Control/ConcentrationPI/Concentration_SP\", -1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "ConcentrationUp"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Concentration SP +0.05",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#006d75",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Control/ConcentrationPI/Concentration_SP\", 1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "FillTargetDown"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Fill Target -5%",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Control/Batch/BatchFill_SP\", -1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "FillTargetUp"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Fill Target +5%",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Control/Batch/BatchFill_SP\", 1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "MixTimeDown"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Mix Time -5 s",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Control/Batch/MixTime_SP\", -1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "MixTimeUp"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Mix Time +5 s",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Control/Batch/MixTime_SP\", 1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "TreatmentManualSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "TreatmentManualSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Manual-Mode Requests",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              },
+              {
+                "meta": {
+                  "name": "TreatmentManualSectionSubtitle",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Requests remain subject to OpenPLC mode, permissive, and interlock logic.",
+                  "style": {
+                    "color": "#627d98",
+                    "fontSize": "12px"
+                  }
+                },
+                "position": {
+                  "basis": "22px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "TreatmentManualControls"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "P201Manual"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Request P-201 Manual Start",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "210px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[default]WaterTreatment/Equipment/P201/P201_ManualStartReq"
+                      },
+                      "type": "tag",
+                      "transforms": [
+                        {
+                          "code": "\treturn \"Clear P-201 Manual Request\" if bool(value) else \"Request P-201 Manual Start\"",
+                          "type": "script"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.toggle_request(\"Equipment/P201/P201_ManualStartReq\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "MixerManual"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Request M-201 Manual Start",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "210px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[default]WaterTreatment/Equipment/M201/M201_ManualStartReq"
+                      },
+                      "type": "tag",
+                      "transforms": [
+                        {
+                          "code": "\treturn \"Clear M-201 Manual Request\" if bool(value) else \"Request M-201 Manual Start\"",
+                          "type": "script"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.toggle_request(\"Equipment/M201/M201_ManualStartReq\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "ValveManual"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Request XV-201 Manual Open",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "220px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[default]WaterTreatment/Equipment/XV201/XV201_ManualOpenReq"
+                      },
+                      "type": "tag",
+                      "transforms": [
+                        {
+                          "code": "\treturn \"Clear XV-201 Manual Request\" if bool(value) else \"Request XV-201 Manual Open\"",
+                          "type": "script"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.toggle_request(\"Equipment/XV201/XV201_ManualOpenReq\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "DosingManual"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Request DP-201 Manual Enable",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "225px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[default]WaterTreatment/Equipment/DP201/DP201_ManualEnableReq"
+                      },
+                      "type": "tag",
+                      "transforms": [
+                        {
+                          "code": "\treturn \"Clear DP-201 Manual Request\" if bool(value) else \"Request DP-201 Manual Enable\"",
+                          "type": "script"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.toggle_request(\"Equipment/DP201/DP201_ManualEnableReq\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "ManualDoseDown"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Manual Dose -5%",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Equipment/DP201/Manual_Dose_Output\", -1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "ManualDoseUp"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Manual Dose +5%",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Equipment/DP201/Manual_Dose_Output\", 1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "TreatmentTrendSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "TreatmentTrendSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Treatment Trend",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "TreatmentTrend"
+            },
+            "type": "ia.chart.powerchart",
+            "props": {
+              "config": {
+                "mode": "realtime",
+                "refreshRate": 1000,
+                "pointCount": 1000,
+                "unitOfTime": 15,
+                "measureOfTime": "minutes",
+                "visibility": {
+                  "showTagBrowser": false,
+                  "showDateRangeSelector": true,
+                  "showPenControlDisplay": true
+                }
+              },
+              "pens": [
+                {
+                  "name": "Concentration PV",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#006d75",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/T201/AIT201_PV",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Concentration SP",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#d64545",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Control/ConcentrationPI/Concentration_SP",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Dosing Output",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#3366cc",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Equipment/DP201/DP201_Output",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "T-201 Level",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#e37b40",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/T201/LIT201_PV",
+                    "aggregateMode": "Average"
+                  }
+                }
+              ],
+              "title": {
+                "visible": true,
+                "text": "Treatment Concentration and Dosing"
+              },
+              "style": {
+                "backgroundColor": "#ffffff",
+                "borderRadius": "8px"
+              }
+            },
+            "position": {
+              "basis": "430px",
+              "grow": 1,
+              "shrink": 1
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#f3f6f9",
+        "classes": "Page/Page",
+        "minHeight": "100%",
+        "overflow": "auto",
+        "paddingBottom": "20px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

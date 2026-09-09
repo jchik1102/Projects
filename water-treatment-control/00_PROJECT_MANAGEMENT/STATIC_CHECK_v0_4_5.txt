@@ -1,0 +1,15 @@
+Water Treatment Control Project v0.4.5 static package check
+
+PASS - OpenPLCModbusBridge implements protected getDiscreteStateSpecificationImpl.
+PASS - Heartbeat is specified as a real scalar double discrete state.
+PASS - LastAIT201 is specified as a real scalar double discrete state.
+PASS - ExchangeCount is specified as a real scalar double discrete state.
+PASS - ReconnectCountdown is specified as a real scalar double discrete state.
+PASS - WarningIssued is specified as a real scalar double discrete state.
+PASS - Model validator checks all five discrete-state specifications.
+PASS - OpenPLCModbusBridge declares row-vector output sizes [1 6], [1 7], [1 4], and [1 1].
+PASS - Model validator checks all four output-port sizes before the live run.
+PASS - MATLAB System block continues to select interpreted execution through getSimulateUsingImpl.
+PASS - No OpenPLC program, Docker configuration, or Modbus register-map changes were made.
+
+Live MATLAB R2026a/Simulink/OpenPLC execution remains required on the target Windows installation.

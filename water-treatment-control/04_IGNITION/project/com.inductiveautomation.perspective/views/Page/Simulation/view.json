@@ -1,0 +1,1351 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Title"
+        },
+        "type": "ia.display.view",
+        "props": {
+          "params": {
+            "icon": "bug_report",
+            "text": "Simulation and Test"
+          },
+          "path": "Page/Embedded/Title"
+        },
+        "position": {
+          "basis": "56px",
+          "shrink": 0
+        }
+      },
+      {
+        "meta": {
+          "name": "SimulationContent"
+        },
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "wrap": "nowrap",
+          "style": {
+            "paddingBottom": "12px",
+            "paddingLeft": "16px",
+            "paddingRight": "16px"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "meta": {
+              "name": "TestWarning"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "backgroundColor": "#fef3f2",
+                "borderColor": "#fda29b",
+                "borderRadius": "8px",
+                "borderStyle": "solid",
+                "borderWidth": "1px",
+                "padding": "14px",
+                "marginBottom": "12px"
+              }
+            },
+            "position": {
+              "basis": "112px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "TestWarningTitle",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "TEST-ONLY CONTROLS",
+                  "style": {
+                    "color": "#b42318",
+                    "fontSize": "17px",
+                    "fontWeight": 800
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              },
+              {
+                "meta": {
+                  "name": "TestWarningText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Run fault injections only during the paced Stage 5/Stage 7 test loop. Verify the expected safe state and alarm, clear the injection, restore healthy conditions, then pulse PLC Reset. Faults are sustained until explicitly cleared.",
+                  "style": {
+                    "color": "#7a271a",
+                    "fontSize": "13px",
+                    "lineHeight": "20px"
+                  }
+                },
+                "position": {
+                  "basis": "58px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "FaultStatusSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "FaultStatusSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Active Fault Injections",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "FaultStatusRow"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "FaultP301A"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FaultP301ATitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A Trip Injection",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "FaultP301AValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Simulation/Fault_P301A_Trip"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ACTIVE\" if bool(value) else \"CLEAR\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "FaultAIT"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FaultAITTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "AIT-201 Freeze",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "FaultAITValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Simulation/Fault_AIT201_Freeze"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ACTIVE\" if bool(value) else \"CLEAR\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "FaultXV"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FaultXVTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "XV-201 Stuck Closed",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "FaultXVValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Simulation/Fault_XV201_StuckClosed"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ACTIVE\" if bool(value) else \"CLEAR\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "FaultComms"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FaultCommsTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Communications Loss",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "FaultCommsValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Simulation/Fault_CommsLoss"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ACTIVE\" if bool(value) else \"CLEAR\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "FaultControlSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "FaultControlSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Scenario Controls",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "FaultControlRow"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "InjectP301A"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Inject P-301A Trip",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#b42318",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "230px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[default]WaterTreatment/Simulation/Fault_P301A_Trip"
+                      },
+                      "type": "tag",
+                      "transforms": [
+                        {
+                          "code": "\treturn \"Clear P-301A Trip\" if bool(value) else \"Inject P-301A Trip\"",
+                          "type": "script"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.toggle_fault(\"Simulation/Fault_P301A_Trip\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "InjectAIT"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Inject AIT-201 Freeze",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#b42318",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "230px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[default]WaterTreatment/Simulation/Fault_AIT201_Freeze"
+                      },
+                      "type": "tag",
+                      "transforms": [
+                        {
+                          "code": "\treturn \"Clear AIT-201 Freeze\" if bool(value) else \"Inject AIT-201 Freeze\"",
+                          "type": "script"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.toggle_fault(\"Simulation/Fault_AIT201_Freeze\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "InjectXV"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Inject XV-201 Stuck Closed",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#b42318",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "230px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[default]WaterTreatment/Simulation/Fault_XV201_StuckClosed"
+                      },
+                      "type": "tag",
+                      "transforms": [
+                        {
+                          "code": "\treturn \"Clear XV-201 Stuck Closed\" if bool(value) else \"Inject XV-201 Stuck Closed\"",
+                          "type": "script"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.toggle_fault(\"Simulation/Fault_XV201_StuckClosed\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "InjectComms"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Inject Communication Loss",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#b42318",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "230px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[default]WaterTreatment/Simulation/Fault_CommsLoss"
+                      },
+                      "type": "tag",
+                      "transforms": [
+                        {
+                          "code": "\treturn \"Clear Communication Loss\" if bool(value) else \"Inject Communication Loss\"",
+                          "type": "script"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.toggle_fault(\"Simulation/Fault_CommsLoss\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "ClearAllFaults"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Clear All Fault Injections",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#b42318",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "230px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.reset_faults()"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "ResetPLC"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Pulse PLC Reset",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.pulse(\"Commands/System_ResetReq\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "FaultResultSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "FaultResultSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "PLC Response",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "FaultResultRow"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "ResultComm"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "ResultCommTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Communication Health",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "ResultCommValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Diagnostics/Comm_Healthy"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"HEALTHY\" if bool(value) else \"FAULT\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "ResultAlarm"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "ResultAlarmTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Any Alarm",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "ResultAlarmValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/Any_Alarm"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ACTIVE\" if bool(value) else \"CLEAR\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "ResultSequence"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "ResultSequenceTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Sequence",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "ResultSequenceValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/Sequence_Faulted"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"FAULTED\" if bool(value) else \"NOT FAULTED\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "ResultFirstOut"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "ResultFirstOutTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "First-Out Code",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "ResultFirstOutValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/FirstOut_Code"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.0f}\").format(float(value))\n\texcept:\n\t    return \"--\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "ResultP301AFail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "ResultP301AFailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A Failed Start",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "ResultP301AFailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/P301A_FailedStart"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ACTIVE\" if bool(value) else \"CLEAR\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "ResultValveFail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "ResultValveFailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "XV-201 Failed Open",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "ResultValveFailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/XV201_FailedOpen"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ACTIVE\" if bool(value) else \"CLEAR\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#f3f6f9",
+        "classes": "Page/Page",
+        "minHeight": "100%",
+        "overflow": "auto",
+        "paddingBottom": "20px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,8 @@
+Test,Pass,Details
+Pressure continuous closed-loop stability,1,Closed-loop poles have maximum real part -0.32582.
+Pressure robustness and reference response,1,PM 60.0 deg; settling 10.47 s; overshoot 11.04%.
+Pressure demand-step rejection,1,Minimum 344.01 kPa; recovery 6.86 s.
+Pressure discrete implementation stability,1,Maximum discrete pole magnitude 0.969250.
+Concentration continuous closed-loop stability,1,Closed-loop poles have maximum real part -0.05753.
+Concentration robustness and response,1,PM 60.0 deg; settling 60.67 s; overshoot 11.51%.
+Concentration discrete implementation stability,1,Maximum discrete pole magnitude 0.972424.

@@ -1,0 +1,8 @@
+Test,Pass,Details
+Pump lag and treatment-tank filling,1,Final speed 99.97%; volume increase 0.3675 m^3 (expected 0.3675).
+Valve travel and closed-flow blocking,1,Closed flow 0.0000 L/s; final valve 0.993; final flow 39.73 L/s.
+Pressure demand-step recovery,1,Minimum 372.43 kPa; final error 0.11 kPa; recovery 6.54 s.
+Concentration mass-balance response,1,Actual 1.200 mg/L; measured 1.198 mg/L.
+Total-water mass balance,1,Mass-balance error 0.000000 m^3.
+Tank physical bounds,1,Observed level range 0.499200% to 100.000000%.
+Pressure sensor lag,1,Peak early actual/PV separation 54.461 kPa.

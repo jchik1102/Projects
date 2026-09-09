@@ -1,0 +1,49 @@
+Address,Tag,Direction,DataType,Scaling,Units,Description
+HR001,LIT101_PV,Simulink_to_PLC,UINT16,% x10,%,Raw-water tank level
+HR002,LIT201_PV,Simulink_to_PLC,UINT16,% x10,%,Treatment-tank level
+HR003,LIT301_PV,Simulink_to_PLC,UINT16,% x10,%,Clean-water tank level
+HR004,FIT101_PV,Simulink_to_PLC,UINT16,L/s x10,L/s,Raw transfer flow
+HR005,FIT201_PV,Simulink_to_PLC,UINT16,L/s x10,L/s,Treatment transfer flow
+HR006,FIT301_PV,Simulink_to_PLC,UINT16,L/s x10,L/s,Distribution demand
+HR007,AIT201_PV,Simulink_to_PLC,UINT16,mg/L x100,mg/L,Treatment concentration
+HR008,PIT301_PV,Simulink_to_PLC,UINT16,kPa x10,kPa,Distribution pressure
+HR009,Plant_Heartbeat,Simulink_to_PLC,UINT16,count,count,Incrementing plant heartbeat
+HR101,P101A_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-101A speed command
+HR102,P101B_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-101B speed command
+HR103,P201_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-201 speed command
+HR104,P301A_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-301A speed command
+HR105,P301B_SpeedCmd,PLC_to_Simulink,UINT16,% x10,%,P-301B speed command
+HR106,DP201_Output,PLC_to_Simulink,UINT16,% x10,%,Dosing output
+HR201,Pressure_SP,Ignition_to_PLC,UINT16,kPa x10,kPa,Pressure setpoint
+HR202,Concentration_SP,Ignition_to_PLC,UINT16,mg/L x100,mg/L,Concentration setpoint
+HR203,BatchFill_SP,Ignition_to_PLC,UINT16,% x10,%,Treatment fill target
+HR204,MixTime_SP,Ignition_to_PLC,UINT16,s,s,Mixing time
+HR301,Batch_State,PLC_to_Ignition,UINT16,integer,state,Active batch state
+HR302,Batch_Count,PLC_to_Ignition,UINT16,integer,count,Completed batches
+HR303,Rejected_Batch_Count,PLC_to_Ignition,UINT16,integer,count,Rejected batches
+HR304,Pressure_PI_Output,PLC_to_Ignition,UINT16,% x10,%,Total booster demand
+HR305,Concentration_PI_Output,PLC_to_Ignition,UINT16,% x10,%,Dosing controller output
+C001,P101A_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-101A running feedback
+C002,P101B_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-101B running feedback
+C003,P201_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-201 running feedback
+C004,P301A_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-301A running feedback
+C005,P301B_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,P-301B running feedback
+C006,M201_RunFb,Simulink_to_PLC,BOOL,Boolean,bool,Mixer running feedback
+C007,XV201_OpenFb,Simulink_to_PLC,BOOL,Boolean,bool,Treatment outlet valve open feedback
+C008,XV201_ClosedFb,Simulink_to_PLC,BOOL,Boolean,bool,Treatment outlet valve closed feedback
+C051,P101A_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-101A start command
+C052,P101B_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-101B start command
+C053,P201_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-201 start command
+C054,P301A_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-301A start command
+C055,P301B_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,P-301B start command
+C056,M201_StartCmd,PLC_to_Simulink,BOOL,Boolean,bool,Mixer start command
+C057,XV201_OpenCmd,PLC_to_Simulink,BOOL,Boolean,bool,Treatment outlet valve open command
+C101,System_StartReq,Ignition_to_PLC,BOOL,Boolean,bool,Automatic system start request
+C102,System_StopReq,Ignition_to_PLC,BOOL,Boolean,bool,System stop request
+C103,System_ResetReq,Ignition_to_PLC,BOOL,Boolean,bool,System reset request
+C104,Auto_ModeReq,Ignition_to_PLC,BOOL,Boolean,bool,Automatic-mode request
+C105,Manual_ModeReq,Ignition_to_PLC,BOOL,Boolean,bool,Manual-mode request
+C251,Fault_P301A_Trip,Test_to_Simulink,BOOL,Boolean,bool,Lead booster trip injection
+C252,Fault_AIT201_Freeze,Test_to_Simulink,BOOL,Boolean,bool,Concentration sensor freeze injection
+C253,Fault_XV201_StuckClosed,Test_to_Simulink,BOOL,Boolean,bool,Outlet valve stuck-closed injection
+C254,Fault_CommsLoss,Test_to_Simulink,BOOL,Boolean,bool,Communication-loss injection

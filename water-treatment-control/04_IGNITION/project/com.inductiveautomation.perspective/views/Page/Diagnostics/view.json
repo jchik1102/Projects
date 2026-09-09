@@ -1,0 +1,1260 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Title"
+        },
+        "type": "ia.display.view",
+        "props": {
+          "params": {
+            "icon": "memory",
+            "text": "Diagnostics"
+          },
+          "path": "Page/Embedded/Title"
+        },
+        "position": {
+          "basis": "56px",
+          "shrink": 0
+        }
+      },
+      {
+        "meta": {
+          "name": "DiagnosticContent"
+        },
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "wrap": "nowrap",
+          "style": {
+            "paddingBottom": "12px",
+            "paddingLeft": "16px",
+            "paddingRight": "16px"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "meta": {
+              "name": "DiagnosticNote",
+              "hasDelegate": true
+            },
+            "type": "ia.display.label",
+            "props": {
+              "text": "Each diagnostic line shows: scaled value | Ignition quality code | source timestamp. Bad-quality bindings also receive the standard Perspective overlay. Run SCADASetup.validate() from the Designer Script Console for a full printed report.",
+              "style": {
+                "color": "#52606d",
+                "fontSize": "12px",
+                "lineHeight": "18px",
+                "marginBottom": "12px"
+              }
+            },
+            "position": {
+              "basis": "56px",
+              "shrink": 0
+            }
+          },
+          {
+            "meta": {
+              "name": "DiagnosticHealthSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "DiagnosticHealthSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Communications and Controller State",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "DiagnosticHealthRow"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "DiagHeartbeat"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagHeartbeatTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Plant Heartbeat  (HR009)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagHeartbeatValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Plant/Utilities/Plant_Heartbeat"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagComm"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagCommTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Comm Healthy  (C151)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagCommValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Diagnostics/Comm_Healthy"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagRunning"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagRunningTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "System Running  (C152)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagRunningValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Diagnostics/System_Running"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagState"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagStateTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Batch State  (HR301)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagStateValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/Batch/Batch_State"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagMode"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagModeTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Active Mode  (HR306)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagModeValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/Modes/Active_Mode"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagFirstOut"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagFirstOutTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "First-Out Code  (HR309)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagFirstOutValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/FirstOut_Code"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "DiagnosticIOSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "DiagnosticIOSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Command / Feedback Comparisons",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "DiagnosticIORow"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "DiagPIT"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagPITTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "PIT-301 PV  (HR008)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagPITValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Plant/Distribution/PIT301_PV"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagPressureSP"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagPressureSPTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Pressure SP  (HR201)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagPressureSPValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/PressurePI/Pressure_SP"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagP301ACmd"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagP301ACmdTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A Start Command  (C054)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagP301ACmdValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301A/P301A_StartCmd"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagP301AFb"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagP301AFbTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A Run Feedback  (C004)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagP301AFbValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301A/P301A_RunFb"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagXVCommand"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagXVCommandTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "XV-201 Open Command  (C057)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagXVCommandValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/XV201/XV201_OpenCmd"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DiagXVFeedback"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "76px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "315px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DiagXVFeedbackTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "XV-201 Open Feedback  (C007)",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DiagXVFeedbackValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- | -- | --",
+                      "style": {
+                        "color": "#102a43",
+                        "fontFamily": "monospace",
+                        "fontSize": "13px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/XV201/XV201_OpenFb"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    stamp = system.date.format(timestamp, \"HH:mm:ss.SSS\")\n\texcept:\n\t    stamp = str(timestamp)\n\treturn str(value) + \" | \" + str(quality) + \" | \" + stamp",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "DiagnosticActionSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "DiagnosticActionSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Commissioning Utilities",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "DiagnosticControls"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "ValidateButton"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Validate All 102 Tags",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#006d75",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "210px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tresult = SCADASetup.validate()\n\tsystem.perspective.print(str(result))"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "ClearRequestsButton"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Clear HMI Requests Safely",
+                  "primary": false,
+                  "style": {
+                    "backgroundColor": "#52606d",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "220px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.clear_requests()"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#f3f6f9",
+        "classes": "Page/Page",
+        "minHeight": "100%",
+        "overflow": "auto",
+        "paddingBottom": "20px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

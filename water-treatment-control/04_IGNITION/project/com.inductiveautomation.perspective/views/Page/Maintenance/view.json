@@ -1,0 +1,1094 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Title"
+        },
+        "type": "ia.display.view",
+        "props": {
+          "params": {
+            "icon": "build",
+            "text": "Maintenance"
+          },
+          "path": "Page/Embedded/Title"
+        },
+        "position": {
+          "basis": "56px",
+          "shrink": 0
+        }
+      },
+      {
+        "meta": {
+          "name": "MaintenanceContent"
+        },
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "wrap": "nowrap",
+          "style": {
+            "paddingBottom": "12px",
+            "paddingLeft": "16px",
+            "paddingRight": "16px"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "meta": {
+              "name": "MaintenanceRuntimeSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "MaintenanceRuntimeSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Runtime Balancing",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "MaintenanceRuntimeRow"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "MaintP101A"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP101ATitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-101A Runtime",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP101AValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- s",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P101A/P101A_Runtime_s"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.0f} s\").format(float(value))\n\texcept:\n\t    return \"-- s\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP101B"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP101BTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-101B Runtime",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP101BValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- s",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P101B/P101B_Runtime_s"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.0f} s\").format(float(value))\n\texcept:\n\t    return \"-- s\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP301A"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP301ATitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A Runtime",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP301AValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- s",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301A/P301A_Runtime_s"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.0f} s\").format(float(value))\n\texcept:\n\t    return \"-- s\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP301B"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP301BTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301B Runtime",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP301BValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- s",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301B/P301B_Runtime_s"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.0f} s\").format(float(value))\n\texcept:\n\t    return \"-- s\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "MaintenanceAvailabilitySection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "MaintenanceAvailabilitySectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Availability and Trips",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "MaintenanceAvailabilityRow"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "MaintP101AAvail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP101AAvailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-101A",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP101AAvailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P101A/P101A_Available"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"AVAILABLE\" if bool(value) else \"UNAVAILABLE\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP101BAvail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP101BAvailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-101B",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP101BAvailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P101B/P101B_Available"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"AVAILABLE\" if bool(value) else \"UNAVAILABLE\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP301AAvail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP301AAvailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP301AAvailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301A/P301A_Available"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"AVAILABLE\" if bool(value) else \"UNAVAILABLE\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP301BAvail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP301BAvailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301B",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP301BAvailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301B/P301B_Available"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"AVAILABLE\" if bool(value) else \"UNAVAILABLE\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP301AFail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP301AFailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A Failed Start",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP301AFailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/P301A_FailedStart"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"FAILED\" if bool(value) else \"NORMAL\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP301BFail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP301BFailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301B Failed Start",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP301BFailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/P301B_FailedStart"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"FAILED\" if bool(value) else \"NORMAL\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "MaintP201Fail"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "MaintP201FailTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-201 Failed Start",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "MaintP201FailValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/P201_FailedStart"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"FAILED\" if bool(value) else \"NORMAL\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "MaintenanceNotes"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "classes": "WaterTreatment/Card"
+              }
+            },
+            "position": {
+              "basis": "125px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "MaintenanceNotesTitle",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Maintenance design note",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "17px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              },
+              {
+                "meta": {
+                  "name": "MaintenanceNotesText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "The verified v0.5.2 PLC map exposes runtime, availability, failed-start alarms, command, and feedback. It does not expose start counters, out-of-service requests, or writable maintenance notes, so this HMI intentionally does not invent controls that OpenPLC cannot enforce.",
+                  "style": {
+                    "color": "#52606d",
+                    "fontSize": "13px",
+                    "lineHeight": "20px"
+                  }
+                },
+                "position": {
+                  "basis": "72px",
+                  "shrink": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#f3f6f9",
+        "classes": "Page/Page",
+        "minHeight": "100%",
+        "overflow": "auto",
+        "paddingBottom": "20px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

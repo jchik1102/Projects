@@ -1,0 +1,5 @@
+v0.3 static package checks: PASSED
+Register/coil tags: 102
+Unique addresses: 102
+Unique OpenPLC locations: 102
+Structured Text characters: 29734

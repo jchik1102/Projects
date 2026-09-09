@@ -1,0 +1,7 @@
+Test,Pass,Details
+Required products available,1,"MATLAB 2026a; Simulink and Control System Toolbox available."
+Parameter structure sanity,1,"Physical values, thresholds, and execution periods are internally consistent."
+Analytical operating points,1,"Nominal booster 91.67%; high-demand 116.67%; dose 64.0 s."
+LTI plant stability and properness,1,"7 LTI plant/actuator models are stable and proper."
+Register-map uniqueness and export,1,"48 unique external tags exported."
+Controller parameter export,1,"Two positive-gain PLC-ready PI parameter sets exported."

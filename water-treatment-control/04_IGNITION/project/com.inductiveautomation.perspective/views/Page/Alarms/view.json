@@ -1,0 +1,231 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Title"
+        },
+        "type": "ia.display.view",
+        "props": {
+          "params": {
+            "icon": "alarm",
+            "text": "Alarm Summary"
+          },
+          "path": "Page/Embedded/Title"
+        },
+        "position": {
+          "basis": "56px",
+          "shrink": 0
+        }
+      },
+      {
+        "meta": {
+          "name": "AlarmContent"
+        },
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "wrap": "nowrap",
+          "style": {
+            "paddingBottom": "12px",
+            "paddingLeft": "16px",
+            "paddingRight": "16px"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "meta": {
+              "name": "ActiveAlarmSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "ActiveAlarmSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Active and Unacknowledged Alarms",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              },
+              {
+                "meta": {
+                  "name": "ActiveAlarmSectionSubtitle",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Use the table controls to filter by priority, state, source, and display path.",
+                  "style": {
+                    "color": "#627d98",
+                    "fontSize": "12px"
+                  }
+                },
+                "position": {
+                  "basis": "22px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "AlarmStatusTable"
+            },
+            "type": "ia.display.alarmstatustable",
+            "props": {
+              "filters": {
+                "active": {
+                  "conditions": {
+                    "provider": "default"
+                  }
+                }
+              },
+              "style": {
+                "backgroundColor": "#ffffff",
+                "borderRadius": "8px"
+              }
+            },
+            "position": {
+              "basis": "420px",
+              "grow": 1,
+              "shrink": 1
+            }
+          },
+          {
+            "meta": {
+              "name": "AlarmJournalSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "AlarmJournalSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Alarm Journal",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              },
+              {
+                "meta": {
+                  "name": "AlarmJournalSectionSubtitle",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Queries the Internal Alarm Journal named WaterTreatmentJournal.",
+                  "style": {
+                    "color": "#627d98",
+                    "fontSize": "12px"
+                  }
+                },
+                "position": {
+                  "basis": "22px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "AlarmJournalTable"
+            },
+            "type": "ia.display.alarmjournaltable",
+            "props": {
+              "name": "WaterTreatmentJournal",
+              "refreshRate": 1000,
+              "orderByAscending": false,
+              "dateRange": {
+                "mode": "realtime",
+                "realtime": {
+                  "interval": 8,
+                  "unit": "hours"
+                }
+              },
+              "filter": {
+                "conditions": {
+                  "provider": "default"
+                }
+              },
+              "style": {
+                "backgroundColor": "#ffffff",
+                "borderRadius": "8px"
+              }
+            },
+            "position": {
+              "basis": "420px",
+              "grow": 1,
+              "shrink": 1
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#f3f6f9",
+        "classes": "Page/Page",
+        "minHeight": "100%",
+        "overflow": "auto",
+        "paddingBottom": "20px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

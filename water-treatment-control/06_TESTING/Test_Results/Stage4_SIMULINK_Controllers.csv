@@ -1,0 +1,6 @@
+Test,Pass,Details
+Pressure PI demand-step performance,1,Minimum 344.66 kPa; recovery 7.32 s; final 400.00 kPa.
+Pressure PI output limits,1,Command range 91.67% to 119.65%.
+Concentration PI reaches acceptance band,1,Stable acceptance begins at 30.20 s; final 1.200 mg/L.
+Concentration PI avoids high-high limit,1,Maximum concentration 1.253 mg/L.
+Concentration PI output limits,1,Dose command range 78.75% to 100.00%.

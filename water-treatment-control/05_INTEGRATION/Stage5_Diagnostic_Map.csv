@@ -1,0 +1,49 @@
+VectorColumn,SourceAddress,Tag,Scaling,Description
+1,HR301,Batch_State,integer,Automatic treatment state
+2,HR302,Batch_Count,integer,Completed batch count
+3,HR303,Rejected_Batch_Count,integer,Rejected batch count
+4,HR304,Pressure_PI_Output,% x10,Total booster PI demand
+5,HR305,Concentration_PI_Output,% x10,Dosing PI demand
+6,HR306,Active_Mode,integer,Active operating mode
+7,HR307,Requested_Mode,integer,Requested operating mode
+8,HR308,Lead_Booster,integer,Lead booster number
+9,HR309,FirstOut_Code,integer,Latched first-out code
+10,HR310,Alarm_Word_1,bitmask,Process alarm word
+11,HR311,Alarm_Word_2,bitmask,Equipment and timeout alarm word
+12,HR312,P101A_Runtime_s,seconds,P-101A accumulated runtime
+13,HR313,P101B_Runtime_s,seconds,P-101B accumulated runtime
+14,HR314,P301A_Runtime_s,seconds,P-301A accumulated runtime
+15,HR315,P301B_Runtime_s,seconds,P-301B accumulated runtime
+16,HR316,Batch_Retry_Count,integer,Current batch quality retry count
+17,HR317,Last_Batch_Duration_s,seconds,Last completed batch duration
+18,C151,Comm_Healthy,Boolean,Plant heartbeat watchdog healthy
+19,C152,System_Running,Boolean,Plant automatic run latch
+20,C153,Batch_Accepted,Boolean,Treatment quality accepted
+21,C154,P101A_Available,Boolean,P-101A available
+22,C155,P101B_Available,Boolean,P-101B available
+23,C156,P301A_Available,Boolean,P-301A available
+24,C157,P301B_Available,Boolean,P-301B available
+25,C158,Pressure_PI_Enabled,Boolean,Pressure PI enabled
+26,C159,Concentration_PI_Enabled,Boolean,Concentration PI enabled
+27,C160,P301A_Lead,Boolean,P-301A is lead
+28,C161,P301B_Lead,Boolean,P-301B is lead
+29,C162,Any_Alarm,Boolean,At least one active alarm
+30,C163,Sequence_Faulted,Boolean,Batch sequence faulted
+31,C164,Batch_Quality_OK,Boolean,Concentration in acceptance band
+32,C165,T101_LowLow,Boolean,Raw-water tank low-low
+33,C166,T201_HighHigh,Boolean,Treatment tank high-high
+34,C167,T301_LowLow,Boolean,Clean-water tank low-low
+35,C168,T301_HighHigh,Boolean,Clean-water tank high-high
+36,C169,Concentration_HighHigh,Boolean,Concentration high-high
+37,C170,Pressure_Low,Boolean,Distribution pressure low
+38,C171,Pressure_High,Boolean,Distribution pressure high
+39,C172,P301A_FailedStart,Boolean,P-301A failed to start
+40,C173,P301B_FailedStart,Boolean,P-301B failed to start
+41,C174,P201_FailedStart,Boolean,P-201 failed to start
+42,C175,XV201_FailedOpen,Boolean,XV-201 failed to open
+43,C176,Communication_Fault,Boolean,Plant heartbeat communication fault
+44,C177,Both_Boosters_Unavailable,Boolean,No available booster pump
+45,C178,Dosing_Timeout,Boolean,Dosing state timeout
+46,C179,Fill_Timeout,Boolean,Fill state timeout
+47,C180,Transfer_Timeout,Boolean,Transfer state timeout
+48,C181,AIT201_Invalid,Boolean,Concentration transmitter invalid

@@ -1,0 +1,539 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Title"
+        },
+        "type": "ia.display.view",
+        "props": {
+          "params": {
+            "icon": "show_chart",
+            "text": "Historical Trends"
+          },
+          "path": "Page/Embedded/Title"
+        },
+        "position": {
+          "basis": "56px",
+          "shrink": 0
+        }
+      },
+      {
+        "meta": {
+          "name": "TrendContent"
+        },
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "wrap": "nowrap",
+          "style": {
+            "paddingBottom": "12px",
+            "paddingLeft": "16px",
+            "paddingRight": "16px"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "meta": {
+              "name": "TrendIntro"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "TrendIntroText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Historical Trends",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              },
+              {
+                "meta": {
+                  "name": "TrendIntroSubtitle",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Use the date-range and pen controls in each Power Chart. The run-once setup enables history on the required tags.",
+                  "style": {
+                    "color": "#627d98",
+                    "fontSize": "12px"
+                  }
+                },
+                "position": {
+                  "basis": "22px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "ProcessHistory"
+            },
+            "type": "ia.chart.powerchart",
+            "props": {
+              "config": {
+                "mode": "realtime",
+                "refreshRate": 1000,
+                "pointCount": 1000,
+                "unitOfTime": 15,
+                "measureOfTime": "minutes",
+                "visibility": {
+                  "showTagBrowser": false,
+                  "showDateRangeSelector": true,
+                  "showPenControlDisplay": true
+                }
+              },
+              "pens": [
+                {
+                  "name": "T-101 Level",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#006d75",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/T101/LIT101_PV",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "T-201 Level",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#d64545",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/T201/LIT201_PV",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "T-301 Level",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#3366cc",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/T301/LIT301_PV",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Pressure",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#e37b40",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/Distribution/PIT301_PV",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Concentration",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#7b61a8",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/T201/AIT201_PV",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Distribution Flow",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#5b8c00",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/Distribution/FIT301_PV",
+                    "aggregateMode": "Average"
+                  }
+                }
+              ],
+              "title": {
+                "visible": true,
+                "text": "Levels, Flows, Pressure, and Concentration"
+              },
+              "style": {
+                "backgroundColor": "#ffffff",
+                "borderRadius": "8px"
+              }
+            },
+            "position": {
+              "basis": "470px",
+              "grow": 1,
+              "shrink": 1
+            }
+          },
+          {
+            "meta": {
+              "name": "ControlTrendSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "ControlTrendSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Control and Sequence History",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "ControlHistory"
+            },
+            "type": "ia.chart.powerchart",
+            "props": {
+              "config": {
+                "mode": "realtime",
+                "refreshRate": 1000,
+                "pointCount": 1000,
+                "unitOfTime": 15,
+                "measureOfTime": "minutes",
+                "visibility": {
+                  "showTagBrowser": false,
+                  "showDateRangeSelector": true,
+                  "showPenControlDisplay": true
+                }
+              },
+              "pens": [
+                {
+                  "name": "Pressure SP",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#006d75",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Control/PressurePI/Pressure_SP",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Pressure PI Output",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#d64545",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Control/PressurePI/Pressure_PI_Output",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Concentration SP",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#3366cc",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Control/ConcentrationPI/Concentration_SP",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Concentration PI Output",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#e37b40",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Control/ConcentrationPI/Concentration_PI_Output",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Batch State",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#7b61a8",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Control/Batch/Batch_State",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "P-301A Speed",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#5b8c00",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Equipment/P301A/P301A_SpeedCmd",
+                    "aggregateMode": "Average"
+                  }
+                }
+              ],
+              "title": {
+                "visible": true,
+                "text": "Controller Outputs, Setpoints, and Sequence"
+              },
+              "style": {
+                "backgroundColor": "#ffffff",
+                "borderRadius": "8px"
+              }
+            },
+            "position": {
+              "basis": "470px",
+              "grow": 1,
+              "shrink": 1
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#f3f6f9",
+        "classes": "Page/Page",
+        "minHeight": "100%",
+        "overflow": "auto",
+        "paddingBottom": "20px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,16 @@
+function T = export_openplc_gain_constants()
+%EXPORT_OPENPLC_GAIN_CONSTANTS Print exact constants from MATLAB's pidtune design.
+P=initialize_water_plant(false); M=derive_plant_models(P,false);
+CTRL=design_all_controllers(P,M,false);
+T=table(["PRESSURE_KP";"PRESSURE_KI_TS";"PRESSURE_BIAS_PCT";"CONCENTRATION_KP";"CONCENTRATION_KI_TS"], ...
+    [CTRL.pressure.Kp;CTRL.pressure.KiTimesTs;CTRL.pressure.nominalCommand_pct; ...
+     P.controller.concentration.openplcKp; ...
+     P.controller.concentration.openplcKiTimesTs], ...
+    'VariableNames',{'OpenPLC_Constant','Value'});
+disp(T);
+thisDir=fileparts(mfilename('fullpath')); root=fileparts(fileparts(thisDir));
+writetable(T,fullfile(root,'05_INTEGRATION','OpenPLC_Exact_Controller_Gains.csv'));
+fprintf('\nCompare these values with the constants in MAIN_Variables.txt.\n');
+fprintf(['The concentration values are the final nonlinear Stage 5 ' ...
+    'commissioning gains, not the reduced-order pidtune candidate.\n']);
+end

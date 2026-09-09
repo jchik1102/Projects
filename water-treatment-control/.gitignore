@@ -1,0 +1,10 @@
+slprj/
+*.slxc
+*.asv
+*.autosave
+*.m~
+.DS_Store
+Thumbs.db
+06_TESTING/Plots/*.png
+06_TESTING/MAT_Files/*.mat
+06_TESTING/Test_Results/*.csv

@@ -1,0 +1,16 @@
+{
+  "host": "0.0.0.0",
+  "port": 5020,
+  "max_coils": 800,
+  "max_discrete_inputs": 800,
+  "max_holding_registers": 800,
+  "max_input_registers": 800,
+  "buffer_mappings": {
+    "coils_start_buffer": 0,
+    "coils_start_bit": 0,
+    "discrete_inputs_start_buffer": 0,
+    "discrete_inputs_start_bit": 0,
+    "holding_registers_start_buffer": 0,
+    "input_registers_start_buffer": 0
+  }
+}

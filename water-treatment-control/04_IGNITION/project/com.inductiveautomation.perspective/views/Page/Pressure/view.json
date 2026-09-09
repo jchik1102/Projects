@@ -1,0 +1,1539 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Title"
+        },
+        "type": "ia.display.view",
+        "props": {
+          "params": {
+            "icon": "speed",
+            "text": "Pressure Control"
+          },
+          "path": "Page/Embedded/Title"
+        },
+        "position": {
+          "basis": "56px",
+          "shrink": 0
+        }
+      },
+      {
+        "meta": {
+          "name": "PressureContent"
+        },
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "wrap": "nowrap",
+          "style": {
+            "paddingBottom": "12px",
+            "paddingLeft": "16px",
+            "paddingRight": "16px"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "meta": {
+              "name": "PressureSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "PressureSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Pressure Controller",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "PressureMetrics"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "PressurePV"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "PressurePVTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Pressure PV",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "PressurePVValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- kPa",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Plant/Distribution/PIT301_PV"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.1f} kPa\").format(float(value))\n\texcept:\n\t    return \"-- kPa\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "PressureSP"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "PressureSPTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Pressure SP",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "PressureSPValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- kPa",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/PressurePI/Pressure_SP"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.1f} kPa\").format(float(value))\n\texcept:\n\t    return \"-- kPa\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "PressureError"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "PressureErrorTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Pressure Error",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "PressureErrorValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- kPa",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "numberFormat({[default]WaterTreatment/Control/PressurePI/Pressure_SP} - {[default]WaterTreatment/Plant/Distribution/PIT301_PV}, \"0.0\") + \" kPa\""
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "PressureOutput"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "PressureOutputTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "PI Output",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "PressureOutputValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- %",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/PressurePI/Pressure_PI_Output"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.1f} %\").format(float(value))\n\texcept:\n\t    return \"-- %\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "DistributionDemand"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "DistributionDemandTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Distribution Demand",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "DistributionDemandValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- L/s",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Plant/Distribution/FIT301_PV"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.1f} L/s\").format(float(value))\n\texcept:\n\t    return \"-- L/s\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "LeadSpeed"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LeadSpeedTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A Speed",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "LeadSpeedValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- %",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301A/P301A_SpeedCmd"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.1f} %\").format(float(value))\n\texcept:\n\t    return \"-- %\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "LagSpeed"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LagSpeedTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301B Speed",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "LagSpeedValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "-- %",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "24px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "36px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301B/P301B_SpeedCmd"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\ttry:\n\t    return (\"{0:.1f} %\").format(float(value))\n\texcept:\n\t    return \"-- %\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "PressureStatus"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "PressurePIEnabled"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "PressurePIEnabledTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Pressure PI",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "PressurePIEnabledValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/PressurePI/Pressure_PI_Enabled"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ENABLED\" if bool(value) else \"DISABLED\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "LeadBooster"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LeadBoosterTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Lead Booster",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "LeadBoosterValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Control/Modes/Lead_Booster"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tvalues = {1: 'P-301A', 2: 'P-301B'}\n\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\ttry:\n\t    return values.get(int(value), \"VALUE \" + str(value))\n\texcept:\n\t    return \"UNKNOWN\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "P301ARun"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "P301ARunTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301A",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "P301ARunValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301A/P301A_RunFb"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"RUNNING\" if bool(value) else \"STOPPED\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "P301BRun"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "P301BRunTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "P-301B",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "P301BRunValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Equipment/P301B/P301B_RunFb"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"RUNNING\" if bool(value) else \"STOPPED\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "PressureLowAlarm"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "PressureLowAlarmTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Pressure Low",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "PressureLowAlarmValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/Pressure_Low"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ALARM\" if bool(value) else \"NORMAL\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "PressureHighAlarm"
+                },
+                "type": "ia.container.flex",
+                "props": {
+                  "direction": "column",
+                  "wrap": "nowrap",
+                  "style": {
+                    "minHeight": "92px",
+                    "classes": "WaterTreatment/Card"
+                  }
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "meta": {
+                      "name": "PressureHighAlarmTitle",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "Pressure High",
+                      "style": {
+                        "color": "#52606d",
+                        "fontSize": "12px",
+                        "fontWeight": 600,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "position": {
+                      "basis": "22px",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "PressureHighAlarmValue",
+                      "hasDelegate": true
+                    },
+                    "type": "ia.display.label",
+                    "props": {
+                      "text": "--",
+                      "style": {
+                        "color": "#102a43",
+                        "fontSize": "18px",
+                        "fontWeight": 700
+                      }
+                    },
+                    "position": {
+                      "basis": "34px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[default]WaterTreatment/Alarms/Pressure_High"
+                          },
+                          "type": "tag",
+                          "transforms": [
+                            {
+                              "code": "\tif not quality.isGood():\n\t    return \"BAD QUALITY\"\n\treturn \"ALARM\" if bool(value) else \"NORMAL\"",
+                              "type": "script"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "PressureControlSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "PressureControlSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Setpoint Control",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              },
+              {
+                "meta": {
+                  "name": "PressureControlSectionSubtitle",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Valid PLC range: 320–500 kPa.",
+                  "style": {
+                    "color": "#627d98",
+                    "fontSize": "12px"
+                  }
+                },
+                "position": {
+                  "basis": "22px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "PressureSetpointControls"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "row",
+              "wrap": "wrap",
+              "style": {
+                "gap": "12px",
+                "marginBottom": "12px"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "PressureSPDown5"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Pressure SP -5 kPa",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#006d75",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Control/PressurePI/Pressure_SP\", -1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              },
+              {
+                "meta": {
+                  "name": "PressureSPUp5"
+                },
+                "type": "ia.input.button",
+                "props": {
+                  "text": "Pressure SP +5 kPa",
+                  "primary": true,
+                  "style": {
+                    "backgroundColor": "#006d75",
+                    "borderRadius": "6px",
+                    "color": "#ffffff",
+                    "fontWeight": 700,
+                    "minHeight": "38px"
+                  }
+                },
+                "position": {
+                  "basis": "142px",
+                  "grow": 0,
+                  "shrink": 1
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tSCADASetup.adjust_setpoint(\"Control/PressurePI/Pressure_SP\", 1)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "PressureDesignNote",
+              "hasDelegate": true
+            },
+            "type": "ia.display.label",
+            "props": {
+              "text": "The verified PLC interface exposes automatic PI output and a writable pressure setpoint. It does not expose a separate manual pressure-output request, so this screen does not create one outside OpenPLC.",
+              "style": {
+                "color": "#52606d",
+                "fontSize": "12px",
+                "lineHeight": "18px",
+                "marginBottom": "12px"
+              }
+            },
+            "position": {
+              "basis": "48px",
+              "shrink": 0
+            }
+          },
+          {
+            "meta": {
+              "name": "PressureTrendSection"
+            },
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "wrap": "nowrap",
+              "style": {
+                "marginBottom": "4px",
+                "marginTop": "8px"
+              }
+            },
+            "position": {
+              "basis": "58px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "meta": {
+                  "name": "PressureTrendSectionText",
+                  "hasDelegate": true
+                },
+                "type": "ia.display.label",
+                "props": {
+                  "text": "Closed-Loop Trend",
+                  "style": {
+                    "color": "#102a43",
+                    "fontSize": "20px",
+                    "fontWeight": 700
+                  }
+                },
+                "position": {
+                  "basis": "28px",
+                  "shrink": 0
+                }
+              }
+            ]
+          },
+          {
+            "meta": {
+              "name": "PressureTrend"
+            },
+            "type": "ia.chart.powerchart",
+            "props": {
+              "config": {
+                "mode": "realtime",
+                "refreshRate": 1000,
+                "pointCount": 1000,
+                "unitOfTime": 15,
+                "measureOfTime": "minutes",
+                "visibility": {
+                  "showTagBrowser": false,
+                  "showDateRangeSelector": true,
+                  "showPenControlDisplay": true
+                }
+              },
+              "pens": [
+                {
+                  "name": "Pressure PV",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#006d75",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/Distribution/PIT301_PV",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Pressure SP",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#d64545",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Control/PressurePI/Pressure_SP",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "PI Output",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#3366cc",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Control/PressurePI/Pressure_PI_Output",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "P-301A Speed",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#e37b40",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Equipment/P301A/P301A_SpeedCmd",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "P-301B Speed",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#7b61a8",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Equipment/P301B/P301B_SpeedCmd",
+                    "aggregateMode": "Average"
+                  }
+                },
+                {
+                  "name": "Demand",
+                  "visible": true,
+                  "enabled": true,
+                  "selectable": true,
+                  "axis": "",
+                  "plot": 0,
+                  "display": {
+                    "type": "line",
+                    "interpolation": "curveLinear",
+                    "breakLine": true,
+                    "styles": {
+                      "normal": {
+                        "stroke": {
+                          "color": "#5b8c00",
+                          "opacity": 1,
+                          "width": 2
+                        }
+                      }
+                    }
+                  },
+                  "data": {
+                    "source": "[default]WaterTreatment/Plant/Distribution/FIT301_PV",
+                    "aggregateMode": "Average"
+                  }
+                }
+              ],
+              "title": {
+                "visible": true,
+                "text": "Distribution Pressure Control"
+              },
+              "style": {
+                "backgroundColor": "#ffffff",
+                "borderRadius": "8px"
+              }
+            },
+            "position": {
+              "basis": "470px",
+              "grow": 1,
+              "shrink": 1
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#f3f6f9",
+        "classes": "Page/Page",
+        "minHeight": "100%",
+        "overflow": "auto",
+        "paddingBottom": "20px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

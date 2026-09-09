@@ -1,0 +1,80 @@
+{
+  "pages": {
+    "/": {
+      "title": "Plant Overview",
+      "viewPath": "Page/Home"
+    },
+    "/treatment": {
+      "title": "Treatment Detail",
+      "viewPath": "Page/Treatment"
+    },
+    "/pumps": {
+      "title": "Pump Station",
+      "viewPath": "Page/Pumps"
+    },
+    "/pressure": {
+      "title": "Pressure Control",
+      "viewPath": "Page/Pressure"
+    },
+    "/alarms": {
+      "title": "Alarm Summary",
+      "viewPath": "Page/Alarms"
+    },
+    "/trends": {
+      "title": "Historical Trends",
+      "viewPath": "Page/Trends"
+    },
+    "/maintenance": {
+      "title": "Maintenance",
+      "viewPath": "Page/Maintenance"
+    },
+    "/simulation": {
+      "title": "Simulation and Test",
+      "viewPath": "Page/Simulation"
+    },
+    "/diagnostics": {
+      "title": "Diagnostics",
+      "viewPath": "Page/Diagnostics"
+    }
+  },
+  "sharedDocks": {
+    "cornerPriority": "top-bottom",
+    "left": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 768,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "menu",
+        "modal": false,
+        "resizable": false,
+        "show": "auto",
+        "size": 210,
+        "viewParams": {},
+        "viewPath": "Docks/Menu"
+      }
+    ],
+    "top": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 480,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 58,
+        "viewParams": {
+          "breakpointLarge": "768",
+          "breakpointMedium": "500",
+          "params": {},
+          "path": "Header/Header"
+        },
+        "viewPath": "Framework/Breakpoint"
+      }
+    ]
+  }
+}
